@@ -1,4 +1,4 @@
-import { verify_access_token } from '../libs/jwt.js';
+const { verify_access_token } = require('../libs/jwt')
 
 const common = (req, res, next) => {
     let access_token = req.headers.authorization
@@ -161,4 +161,4 @@ const users = (req, res, next) => {
 }
 
 
-export { sysadmin, common, verified, users }
+module.export = { sysadmin, common, verified, users }

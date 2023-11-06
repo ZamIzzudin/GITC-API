@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+const bcrypt = require('bcrypt')
 
 async function encrpyt_one_way(data) {
     const salt = await bcrypt.genSalt();
@@ -13,4 +13,4 @@ async function pairing_one_way(raw, encrypted) {
     return is_same
 }
 
-export { encrpyt_one_way, pairing_one_way }
+module.export = { encrpyt_one_way, pairing_one_way }

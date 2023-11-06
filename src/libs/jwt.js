@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken'
-import config from '../config/config.js'
+const jwt = require('jsonwebtoken')
+const config = require('../config/config.js')
 
 const {
     MAX_AGE_ACCESS_TOKEN,
@@ -28,7 +28,8 @@ const verify_refresh_token = (token, callback) => {
     return jwt.verify(token, REFRESH_TOKEN, callback)
 }
 
-export {
+
+module.export = {
     create_access_token,
     create_refresh_token,
     verify_access_token,
