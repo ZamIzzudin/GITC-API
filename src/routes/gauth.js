@@ -1,40 +1,20 @@
-const express = require('express');
-const gauth = express.Router();
+const express = require('express')
+const gauth = express.Router()
+const { auth, redirect, driveList, upload, webView, download, remove } = require('../controllers/gauth')
 
-const connector = require('../config/gdrive.js')
-const { update } = require('../controllers/credential')
-const config = require('../config/config.js')
-const cron = require('node-cron')
+// AUTH
+gauth.get('/auth', auth)
+gauth.get('/redirect', redirect)
 
-const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } = config
-const { oauth2Client: oauth, drive, refreshToken } = connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
+// READ
+gauth.get('/drive/:id_folder', driveList)
+gauth.get('/open/:id_file', webView)
+gauth.get('/download/:id_file', download)
 
-gauth.get('/auth', (req, res) => {
-    const url = oauth.generateAuthUrl({
-        access_type: 'offline',
-        scope: [
-            'https://www.googleapis.com/auth/userinfo.profile',
-            'https://www.googleapis.com/auth/drive'
-        ]
-    })
-    res.redirect(url)
-})
+// CREATE
+gauth.post('/upload/:id_folder', upload)
 
-gauth.get('/redirect', async (req, res) => {
-    const { code } = req.query
-    const { tokens } = await oauth.getToken(code)
-    oauth.setCredentials(tokens)
-    update(tokens)
-    res.redirect('/')
-})
-
-gauth.get('/drive', async (req, res) => {
-    const response = await drive.files.list()
-    res.send(response.data.files)
-})
-
-cron.schedule('0 10 * * *', () => {
-    refreshToken();
-});
+// DELETE
+gauth.delete('/delete/:id_file', remove)
 
 module.exports = gauth

@@ -3,15 +3,13 @@ const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const helmet = require('helmet')
+const fileUpload = require('express-fileupload')
 
 const routes = require('./src/routes/index')
 
 const dbConnection = require('./src/config/db.js')
 const config = require('./src/config/config.js')
 const path = require('path')
-
-// const __filename = fileURLToPath(import.meta.url)
-// const __dirname = path.dirname(__filename)
 
 // setup configuration
 const { PORT, MONGO_URL } = config
@@ -38,9 +36,14 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //allow request with format json
 app.use(bodyParser.json())
 
-// // route render
+//file uploader handler
+app.use(fileUpload({
+    uploadTimeout: 60000
+}))
+
+//route render
 app.use(routes)
 
-// success flagging
+//success flagging
 app.listen(PORT, () => console.log(`server running on port ${PORT}`))
 dbConnection(MONGO_URL)
