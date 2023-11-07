@@ -29,7 +29,7 @@ const verify_refresh_token = (token, callback) => {
 }
 
 
-module.export = {
+module.exports = {
     create_access_token,
     create_refresh_token,
     verify_access_token,

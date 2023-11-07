@@ -10,9 +10,10 @@ function connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI) {
 
     try {
         const credential = fs.readFileSync("credential.json")
-        oauth2Client.setCredentials(JSON.parse(credential))
-    } catch (error) {
-        console.log(error.message)
+        const parsed = JSON.parse(credential)
+
+        oauth2Client.setCredentials(parsed)
+    } catch {
         console.log('Failed to get credentials')
     }
 
@@ -21,7 +22,19 @@ function connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI) {
         auth: oauth2Client
     });
 
-    return { oauth2Client, drive }
+    const refreshToken = () => {
+        oauth2Client.refreshAccessToken((err, tokens) => {
+            if (err) {
+                console.error('Failed to renew token', err);
+            } else {
+                fs.writeFileSync('credential.json', JSON.stringify(tokens))
+                oauth2Client.setCredentials(tokens)
+                console.log('Success renew token')
+            }
+        })
+    }
+
+    return { oauth2Client, drive, refreshToken }
 }
 
 module.exports = connector

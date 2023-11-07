@@ -1,6 +1,6 @@
 const { verify_access_token } = require('../libs/jwt')
 
-const common = (req, res, next) => {
+const guest = (req, res, next) => {
     let access_token = req.headers.authorization
     if (!access_token) {
         return res.status(401).json({
@@ -19,7 +19,7 @@ const common = (req, res, next) => {
                     message: 'failed',
                     info: 'expired token'
                 });
-            } else if (decoded.role.toLowerCase() !== 'common') {
+            } else if (decoded.role.toLowerCase() !== 'Guest') {
                 return res.status(401).json({
                     status: 401,
                     message: 'failed',
@@ -40,7 +40,7 @@ const common = (req, res, next) => {
     }
 };
 
-const verified = (req, res, next) => {
+const admin = (req, res, next) => {
     let access_token = req.headers.authorization
     if (!access_token) {
         return res.status(401).json({
@@ -59,7 +59,7 @@ const verified = (req, res, next) => {
                     message: 'failed',
                     info: 'expired token'
                 });
-            } else if (decoded.role.toLowerCase() !== 'verified') {
+            } else if (decoded.role.toLowerCase() !== 'Admin') {
                 return res.status(401).json({
                     status: 401,
                     message: 'failed',
@@ -100,7 +100,7 @@ const sysadmin = (req, res, next) => {
                     message: 'failed',
                     info: 'expired token'
                 });
-            } else if (decoded.role.toLowerCase() !== 'sysadmin') {
+            } else if (decoded.role.toLowerCase() !== 'Sysadmin') {
                 return res.status(401).json({
                     status: 401,
                     message: 'failed',
@@ -120,7 +120,7 @@ const sysadmin = (req, res, next) => {
     }
 }
 
-const users = (req, res, next) => {
+const islogin = (req, res, next) => {
     let access_token = req.headers.authorization
     if (!access_token) {
         return res.status(401).json({
@@ -140,13 +140,8 @@ const users = (req, res, next) => {
                     message: 'failed',
                     info: 'expired token'
                 });
-            } else if (decoded.role.toLowerCase() !== 'common' && decoded.role.toLowerCase() !== 'verified') {
-                return res.status(401).json({
-                    status: 401,
-                    message: 'failed',
-                    info: 'access denied'
-                });
             }
+
             req.token = decoded
             next()
         })
@@ -160,5 +155,4 @@ const users = (req, res, next) => {
     }
 }
 
-
-module.export = { sysadmin, common, verified, users }
+module.exports = { sysadmin, admin, guest, islogin }

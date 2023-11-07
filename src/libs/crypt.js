@@ -13,4 +13,4 @@ async function pairing_one_way(raw, encrypted) {
     return is_same
 }
 
-module.export = { encrpyt_one_way, pairing_one_way }
+module.exports = { encrpyt_one_way, pairing_one_way }
