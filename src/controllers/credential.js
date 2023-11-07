@@ -7,6 +7,7 @@ const get = async () => {
 
 const update = async (data) => {
     await Credential.updateOne({ _id: '654a12762e473cf733e2af1b' }, data)
+    return
 }
 
 module.exports = { get, update }

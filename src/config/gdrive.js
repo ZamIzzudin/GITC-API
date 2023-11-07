@@ -26,7 +26,7 @@ function connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI) {
             if (err) {
                 console.error('Failed to renew token', err);
             } else {
-                update(JSON.stringify(tokens))
+                update(tokens)
                 oauth2Client.setCredentials(tokens)
                 console.log('Success renew token')
             }
