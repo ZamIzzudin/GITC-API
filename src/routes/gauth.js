@@ -24,7 +24,7 @@ gauth.get('/redirect', async (req, res) => {
     const { code } = req.query
     const { tokens } = await oauth.getToken(code)
     oauth.setCredentials(tokens)
-    update(JSON.stringify(tokens))
+    update(tokens)
     res.redirect('/')
 })
 
