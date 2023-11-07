@@ -5,8 +5,8 @@ async function get() {
         const credential = await Credential.findOne({ _id: '654a12762e473cf733e2af1b' })
         return credential
     } catch (err) {
-        console.error(error);
-        throw error;
+        console.error(err);
+        throw err;
     }
 }
 
@@ -15,8 +15,8 @@ const update = async (data) => {
         await Credential.updateOne({ _id: '654a12762e473cf733e2af1b' }, data)
         return
     } catch (err) {
-        console.error(error);
-        throw error;
+        console.error(err);
+        throw err;
     }
 }
 
