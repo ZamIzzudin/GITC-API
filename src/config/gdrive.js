@@ -9,9 +9,9 @@ function connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI) {
     )
 
     try {
-        const credential = get()
-
-        oauth2Client.setCredentials(credential)
+        get().then((credential) => {
+            oauth2Client.setCredentials(credential)
+        })
     } catch {
         console.log('Failed to get credentials')
     }
