@@ -1,5 +1,5 @@
 const { google } = require('googleapis')
-const fs = require('fs')
+const { get, update } = require('../controllers/credential')
 
 function connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI) {
     const oauth2Client = new google.auth.OAuth2(
@@ -9,10 +9,9 @@ function connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI) {
     )
 
     try {
-        const credential = fs.readFileSync("credential.json")
-        const parsed = JSON.parse(credential)
+        const credential = get()
 
-        oauth2Client.setCredentials(parsed)
+        oauth2Client.setCredentials(credential)
     } catch {
         console.log('Failed to get credentials')
     }
@@ -27,7 +26,7 @@ function connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI) {
             if (err) {
                 console.error('Failed to renew token', err);
             } else {
-                fs.writeFileSync('credential.json', JSON.stringify(tokens))
+                update(JSON.stringify(tokens))
                 oauth2Client.setCredentials(tokens)
                 console.log('Success renew token')
             }

@@ -2,7 +2,7 @@ const express = require('express');
 const gauth = express.Router();
 
 const connector = require('../config/gdrive.js')
-const fs = require('fs')
+const { update } = require('../controllers/credential')
 const config = require('../config/config.js')
 const cron = require('node-cron')
 
@@ -24,7 +24,7 @@ gauth.get('/redirect', async (req, res) => {
     const { code } = req.query
     const { tokens } = await oauth.getToken(code)
     oauth.setCredentials(tokens)
-    fs.writeFileSync('credential.json', JSON.stringify(tokens))
+    update(JSON.stringify(tokens))
     res.redirect('/')
 })
 
@@ -33,7 +33,7 @@ gauth.get('/drive', async (req, res) => {
     res.send(response.data.files)
 })
 
-cron.schedule('*/15 * * * *', () => {
+cron.schedule('0 10 * * *', () => {
     refreshToken();
 });
 
