@@ -9,19 +9,15 @@ const confirm_scheme = new mongoose.Schema({
     },
     perihal: String,
     nama_tertuju: String,
-    media_referensi: String,
+    media_referensi: {
+        type: String,
+        enum: ["Email", "Telepon", "Perjanjian Kerja Sama", "Kesepakatan Pada Tanggal"],
+        default: ["Email"]
+    },
     tanggal_referensi: Date,
     jenis_permohonan: String,
-    kategori_produk: {
-        type: String,
-        enum: ['X', 'Y', 'Z'],
-        default: 'X'
-    },
-    jenis_produk: {
-        type: String,
-        enum: ['X', 'Y', 'Z'],
-        default: 'X'
-    },
+    kategori_produk: String,
+    jenis_produk: String,
     tanggal_kegiatan: Date,
     harga: Number,
     jumlah: Number,
@@ -29,8 +25,10 @@ const confirm_scheme = new mongoose.Schema({
     nominal_terbilang: String,
     term_n_condition: String,
     durasi_kegiatan: String,
-    approval: String,
-    approved_by: String,
+    approver: {
+        type: String,
+        defult: "unset"
+    },
     submitted_by: String,
     revisi: {
         type: Array,
@@ -38,8 +36,8 @@ const confirm_scheme = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['draft', 'submitted', 'approved', 'need revision', 'rejected'],
-        default: 'draft'
+        enum: ['submitted', 'approved', 'need revision', 'rejected'],
+        default: 'submitted'
     },
     drive_id: {
         type: String,

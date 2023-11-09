@@ -238,4 +238,58 @@ const takedown = async (req, res) => {
     }
 }
 
-module.exports = { login, refresh, register, adjust, takedown }
+const user_list = async (req, res) => {
+    try {
+        const users = await User.find({}, { _id: 1, username: 1, display_name: 1, role: 1 })
+
+        if (users.length > 0 && users !== null) {
+            res.status(200).json({
+                status: 200,
+                data: users
+            })
+        } else {
+            res.status(200).json({
+                status: 200,
+                data: [],
+                message: 'No User Found',
+            })
+        }
+
+    } catch (error) {
+        console.log(error.message)
+        res.status(404).json({
+            status: 404,
+            message: 'failed',
+            info: 'Server Error'
+        })
+    }
+}
+
+const guest_list = async (req, res) => {
+    try {
+        const guests = await User.find({ role: 'Guest' }, { _id: 1, username: 1, display_name: 1, role: 1 })
+
+        if (guests.length > 0 && guests !== null) {
+            res.status(200).json({
+                status: 200,
+                data: guests
+            })
+        } else {
+            res.status(200).json({
+                status: 200,
+                data: [],
+                message: 'No Guest Found',
+            })
+        }
+
+    } catch (error) {
+        console.log(error.message)
+        res.status(404).json({
+            status: 404,
+            message: 'failed',
+            info: 'Server Error'
+        })
+    }
+}
+
+module.exports = { login, refresh, register, adjust, takedown, user_list, guest_list }

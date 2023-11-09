@@ -1,5 +1,4 @@
-const express = require('express')
-const gauth = express.Router()
+const gauth = require('express').Router()
 const { auth, redirect, driveList, upload, webView, download, remove } = require('../controllers/gauth')
 
 // AUTH

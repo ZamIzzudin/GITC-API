@@ -1,8 +1,9 @@
 // Setup express Router
-const express = require('express');
-const routes = express.Router();
-const gauth = require('./gauth');
-const auth = require('./auth');
+const routes = require('express').Router()
+// const gauth = require('./gauth')
+const auth = require('./auth')
+const offer = require('./offer')
+const confirm = require('./confirm')
 
 // Default
 routes.get('/', (req, res) => {
@@ -12,8 +13,10 @@ routes.get('/', (req, res) => {
     })
 })
 
-routes.use('/google', gauth)
+// routes.use('/google', gauth)
 routes.use('/auth', auth)
+routes.use('/offer', offer)
+routes.use('/confirm', confirm)
 
 routes.get('*', (req, res) => {
     res.json({

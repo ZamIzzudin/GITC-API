@@ -1,10 +1,11 @@
-const express = require('express');
-const auth = express.Router();
-const { login, refresh, register, adjust, takedown } = require('../controllers/auth')
+const auth = require('express').Router()
+const { login, refresh, register, adjust, takedown, guest_list, user_list } = require('../controllers/auth')
 const { sysadmin, islogin } = require('../middleware/privilege')
 
 // GET
 auth.get('/refresh', islogin, refresh)
+auth.get('/guest', guest_list)
+auth.get('/list', user_list)
 
 // POST
 auth.post('/login', login)
