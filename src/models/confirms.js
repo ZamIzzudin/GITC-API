@@ -5,7 +5,7 @@ const confirm_scheme = new mongoose.Schema({
     tanggal_surat: Date,
     nomor_surat: {
         type: String,
-        defualt: 'unset'
+        default: 'unset'
     },
     perihal: String,
     nama_tertuju: String,
@@ -16,18 +16,15 @@ const confirm_scheme = new mongoose.Schema({
     },
     tanggal_referensi: Date,
     jenis_permohonan: String,
-    kategori_produk: String,
-    jenis_produk: String,
+    produk: [],
     tanggal_kegiatan: Date,
-    harga: Number,
-    jumlah: Number,
     total_harga: Number,
     nominal_terbilang: String,
     term_n_condition: String,
     durasi_kegiatan: String,
     approver: {
         type: String,
-        defult: "unset"
+        default: "unset"
     },
     submitted_by: String,
     revisi: {
@@ -36,9 +33,10 @@ const confirm_scheme = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['submitted', 'approved', 'need revision', 'rejected'],
+        enum: ['submitted', 'approved', 'need revision', 'rejected', 'done'],
         default: 'submitted'
     },
+    template: [],
     drive_id: {
         type: String,
         default: 'unset'

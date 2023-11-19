@@ -5,6 +5,8 @@ const auth = require('./auth')
 const offer = require('./offer')
 const confirm = require('./confirm')
 
+const { upload } = require('../controllers/uploader')
+
 // Default
 routes.get('/', (req, res) => {
     res.json({
@@ -17,6 +19,8 @@ routes.get('/', (req, res) => {
 routes.use('/auth', auth)
 routes.use('/offer', offer)
 routes.use('/confirm', confirm)
+
+routes.post('/oth/upload/:id_letter', upload)
 
 routes.get('*', (req, res) => {
     res.json({

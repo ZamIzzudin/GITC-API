@@ -12,8 +12,8 @@ async function get() {
 
 const update = async (data) => {
     try {
-        await Credential.updateOne({ _id: '654a619e309d5d0a82db7d0b' }, data).maxTimeMS(20000)
-        return
+        const credential = await Credential.updateOne({ _id: '654a619e309d5d0a82db7d0b' }, data).maxTimeMS(20000)
+        return credential
     } catch (err) {
         console.error(err);
         throw err;

@@ -96,9 +96,6 @@ const refresh = async (req, res) => {
                     res.status(200).json({
                         status: 200,
                         message: 'success',
-                        username: user.username,
-                        display_name: user.display_name,
-                        profile_picture: user.profile_picture,
                         role: decoded.role,
                         access_token
                     })
@@ -188,7 +185,7 @@ const adjust = async (req, res) => {
         const user = await User.updateOne({ _id: id }, { role })
 
         // when data user is not found
-        if (!user.acknowledged) {
+        if (!user.modifiedCount) {
             return res.status(400).json({
                 status: 400,
                 message: 'failed',

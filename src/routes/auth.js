@@ -4,12 +4,12 @@ const { sysadmin, islogin } = require('../middleware/privilege')
 
 // GET
 auth.get('/refresh', islogin, refresh)
-auth.get('/guest', guest_list)
-auth.get('/list', user_list)
+auth.get('/guest', sysadmin, guest_list)
+auth.get('/list', sysadmin, user_list)
 
 // POST
 auth.post('/login', login)
-auth.post('/register', register)
+auth.post('/register', sysadmin, register)
 
 // PUT
 auth.put('/adjust/:id', sysadmin, adjust)

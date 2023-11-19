@@ -1,4 +1,5 @@
 const Confirm = require('../models/confirms')
+const { getLatestNumber, updateLatestNumber } = require('./increment.js')
 
 const confirm_list = async (req, res) => {
     const { status } = req.params
@@ -38,22 +39,20 @@ const create = async (req, res) => {
 
     try {
         const payload = {
-            nama_penerbit: body.nama_penerbit ? body.nama_penerbit : new Error('All require paramater must be filled'),
-            tanggal_surat: body.tanggal_surat ? body.tanggal_surat : new Error('All require paramater must be filled'),
-            perihal: body.perihal ? body.perihal : new Error('All require paramater must be filled'),
-            nama_tertuju: body.nama_tertuju ? body.nama_tertuju : new Error('All require paramater must be filled'),
-            media_referensi: body.media_referensi ? body.media_referensi : new Error('All require paramater must be filled'),
-            tanggal_referensi: body.tanggal_referensi ? body.tanggal_referensi : new Error('All require paramater must be filled'),
-            jenis_permohonan: body.jenis_permohonan ? body.jenis_permohonan : new Error('All require paramater must be filled'),
-            kategori_produk: body.kategori_produk ? body.kategori_produk : new Error('All require paramater must be filled'),
-            jenis_produk: body.jenis_produk ? body.jenis_produk : new Error('All require paramater must be filled'),
-            tanggal_kegiatan: body.tanggal_kegiatan ? body.tanggal_kegiatan : new Error('All require paramater must be filled'),
-            harga: body.harga ? body.harga : new Error('All require paramater must be filled'),
-            jumlah: body.jumlah ? body.jumlah : new Error('All require paramater must be filled'),
-            total_harga: body.total_harga ? body.total_harga : new Error('All require paramater must be filled'),
-            nominal_terbilang: body.nominal_terbilang ? body.nominal_terbilang : new Error('All require paramater must be filled'),
-            term_n_condition: body.term_n_condition ? body.term_n_condition : new Error('All require paramater must be filled'),
-            submitted_by: body.submitted_by ? body.submitted_by : new Error('All require paramater must be filled'),
+            nama_penerbit: body.nama_penerbit,
+            tanggal_surat: body.tanggal_surat,
+            perihal: body.perihal,
+            nama_tertuju: body.nama_tertuju,
+            media_referensi: body.media_referensi,
+            tanggal_referensi: body.tanggal_referensi,
+            jenis_permohonan: body.jenis_permohonan,
+            produk: body.produk,
+            tanggal_kegiatan: body.tanggal_kegiatan,
+            durasi_kegiatan: body.durasi_kegiatan,
+            total_harga: body.total_harga,
+            nominal_terbilang: body.nominal_terbilang,
+            term_n_condition: body.term_n_condition,
+            submitted_by: body.submitted_by,
         }
 
         const new_confirm = await Confirm.create(payload)
@@ -93,7 +92,7 @@ const approve = async (req, res) => {
 
         const approved = await Confirm.updateOne({ _id: id_letter }, payload)
 
-        if (approved.acknowledged) {
+        if (approved.modifiedCount) {
             res.status(200).json({
                 status: 200,
                 message: 'Success Approved Confirming Letter'
@@ -129,7 +128,7 @@ const revision = async (req, res) => {
 
         const revision = await Confirm.updateOne({ _id: id_letter }, payload)
 
-        if (revision.acknowledged) {
+        if (revision.modifiedCount) {
             res.status(200).json({
                 status: 200,
                 message: 'Success Asking Revision Confirming Letter'
@@ -158,28 +157,26 @@ const resubmit = async (req, res) => {
 
     try {
         const payload = {
-            nama_penerbit: body.nama_penerbit ? body.nama_penerbit : new Error('All require paramater must be filled'),
-            tanggal_surat: body.tanggal_surat ? body.tanggal_surat : new Error('All require paramater must be filled'),
-            perihal: body.perihal ? body.perihal : new Error('All require paramater must be filled'),
-            nama_tertuju: body.nama_tertuju ? body.nama_tertuju : new Error('All require paramater must be filled'),
-            media_referensi: body.media_referensi ? body.media_referensi : new Error('All require paramater must be filled'),
-            tanggal_referensi: body.tanggal_referensi ? body.tanggal_referensi : new Error('All require paramater must be filled'),
-            jenis_permohonan: body.jenis_permohonan ? body.jenis_permohonan : new Error('All require paramater must be filled'),
-            kategori_produk: body.kategori_produk ? body.kategori_produk : new Error('All require paramater must be filled'),
-            jenis_produk: body.jenis_produk ? body.jenis_produk : new Error('All require paramater must be filled'),
-            tanggal_kegiatan: body.tanggal_kegiatan ? body.tanggal_kegiatan : new Error('All require paramater must be filled'),
-            harga: body.harga ? body.harga : new Error('All require paramater must be filled'),
-            jumlah: body.jumlah ? body.jumlah : new Error('All require paramater must be filled'),
-            total_harga: body.total_harga ? body.total_harga : new Error('All require paramater must be filled'),
-            nominal_terbilang: body.nominal_terbilang ? body.nominal_terbilang : new Error('All require paramater must be filled'),
-            term_n_condition: body.term_n_condition ? body.term_n_condition : new Error('All require paramater must be filled'),
-            submitted_by: body.submitted_by ? body.submitted_by : new Error('All require paramater must be filled'),
+            nama_penerbit: body.nama_penerbit,
+            tanggal_surat: body.tanggal_surat,
+            perihal: body.perihal,
+            nama_tertuju: body.nama_tertuju,
+            media_referensi: body.media_referensi,
+            tanggal_referensi: body.tanggal_referensi,
+            jenis_permohonan: body.jenis_permohonan,
+            produk: body.produk,
+            tanggal_kegiatan: body.tanggal_kegiatan,
+            durasi_kegiatan: body.durasi_kegiatan,
+            total_harga: body.total_harga,
+            nominal_terbilang: body.nominal_terbilang,
+            term_n_condition: body.term_n_condition,
+            submitted_by: body.submitted_by,
             status: 'submitted'
         }
 
         const resubmitted = await Confirm.updateOne({ _id: id_letter }, payload)
 
-        if (resubmitted.acknowledged) {
+        if (resubmitted.modifiedCount) {
             res.status(200).json({
                 status: 200,
                 message: 'Success Resubmit Confirming Letter'
@@ -214,7 +211,7 @@ const reject = async (req, res) => {
 
         const rejected = await Confirm.updateOne({ _id: id_letter }, payload)
 
-        if (rejected.acknowledged) {
+        if (rejected.modifiedCount) {
             res.status(200).json({
                 status: 200,
                 message: 'Success Reject Confirming Letter'
@@ -266,4 +263,41 @@ const remove = async (req, res) => {
     }
 }
 
-module.exports = { confirm_list, create, approve, revision, resubmit, reject, remove }
+const print = async (req, res) => {
+    const { id_letter } = req.params
+
+    try {
+        const latestNumber = await getLatestNumber()
+
+        const payload = {
+            nomor_surat: latestNumber.latest_template,
+        }
+
+        await updateLatestNumber(latestNumber.latest_number + 1)
+
+        const printed = await Confirm.updateOne({ _id: id_letter }, payload)
+
+        if (printed.modifiedCount) {
+            res.status(200).json({
+                status: 200,
+                message: 'Success Print Confirming Letter'
+            })
+        } else {
+            res.status(400).json({
+                status: 400,
+                message: 'failed',
+                info: 'Cannot Print Confirming letter'
+            })
+        }
+
+    } catch (error) {
+        console.log(error.message)
+        res.status(404).json({
+            status: 404,
+            message: 'failed',
+            info: 'Server failed'
+        })
+    }
+}
+
+module.exports = { confirm_list, create, approve, revision, resubmit, reject, remove, print }

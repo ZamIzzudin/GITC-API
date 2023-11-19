@@ -1,19 +1,23 @@
 const offer = require('express').Router()
-const { offer_list, create, approve, resubmit, revision, reject, remove } = require('../controllers/offer')
+const { offer_list, create, approve, resubmit, revision, reject, remove, print } = require('../controllers/offer')
+const { upload } = require('../controllers/uploader')
+const { islogin, admins, pic } = require('../middleware/privilege')
 
 // READ
-offer.get('/:status', offer_list)
+offer.get('/:status', islogin, offer_list)
 
 // CREATE
-offer.post('/', create)
+offer.post('/', admins, create)
+offer.post('/upload/:id_letter', admins, upload)
 
 // UPDATE
-offer.put('/approve/:id_letter', approve)
-offer.put('/revision/:id_letter', revision)
-offer.put('/resubmit/:id_letter', resubmit)
-offer.put('/reject/:id_letter', reject)
+offer.put('/approve/:id_letter', pic, approve)
+offer.put('/revision/:id_letter', pic, revision)
+offer.put('/resubmit/:id_letter', admins, resubmit)
+offer.put('/reject/:id_letter', pic, reject)
+offer.put('/print/:id_letter', admins, print)
 
 // DELETE
-offer.delete('/:id_letter', remove)
+offer.delete('/:id_letter', admins, remove)
 
 module.exports = offer
