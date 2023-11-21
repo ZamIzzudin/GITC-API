@@ -7,9 +7,9 @@ const { refreshToken } = connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
 async function refresh(req, res) {
     await refreshToken()
 
-    res.json({
+    return res.json({
         status: 'triggered'
     })
 }
 
-module.export = refresh
+module.exports = refresh
