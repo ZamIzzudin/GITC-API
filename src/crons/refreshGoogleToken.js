@@ -4,7 +4,7 @@ const connector = require('../config/gdrive.js')
 const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } = config
 const { refreshToken } = connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
 
-async function refresh(req, res) {
+const refresh = async (req, res) => {
     await refreshToken()
 
     return res.json({
