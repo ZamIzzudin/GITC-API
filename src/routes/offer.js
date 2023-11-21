@@ -4,7 +4,7 @@ const { upload } = require('../controllers/uploader')
 const { islogin, admins, pic } = require('../middleware/privilege')
 
 // READ
-offer.get('/:status', islogin, offer_list)
+offer.get('/', islogin, offer_list)
 
 // CREATE
 offer.post('/', admins, create)

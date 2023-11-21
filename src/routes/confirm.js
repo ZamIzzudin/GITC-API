@@ -4,7 +4,7 @@ const { upload } = require('../controllers/uploader')
 const { islogin, admins, pic } = require('../middleware/privilege')
 
 // READ
-confirm.get('/:status', islogin, confirm_list)
+confirm.get('/', islogin, confirm_list)
 
 // CREATE
 confirm.post('/', admins, create)

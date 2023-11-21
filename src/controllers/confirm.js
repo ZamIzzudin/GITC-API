@@ -2,14 +2,8 @@ const Confirm = require('../models/confirms')
 const { getLatestNumber, updateLatestNumber } = require('./increment.js')
 
 const confirm_list = async (req, res) => {
-    const { status } = req.params
-
     try {
-        if (!status) {
-            throw new Error('Status must be filled')
-        }
-
-        const confirms = await Confirm.find({ status })
+        const confirms = await Confirm.find()
 
         if (confirms.length > 0 && confirms !== null) {
             res.status(200).json({
