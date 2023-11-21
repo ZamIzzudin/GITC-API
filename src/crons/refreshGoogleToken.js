@@ -5,9 +5,11 @@ const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } = config
 const { refreshToken } = connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
 
 async function refresh(req, res) {
-    const token = refreshToken()
+    await refreshToken()
 
-    res.json(token)
+    res.json({
+        status: 'triggered'
+    })
 }
 
-module.exports = refresh
+module.export = refresh
