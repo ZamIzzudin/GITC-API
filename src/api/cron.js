@@ -3,7 +3,7 @@ const connector = require('../config/gdrive.js')
 
 const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } = config
 
-const vercelRefresh = async (req, res) => {
+module.exports = async (req, res) => {
     try {
         const { refreshToken } = await connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
 
@@ -26,11 +26,3 @@ const vercelRefresh = async (req, res) => {
         })
     }
 }
-
-const cronRefresh = async () => {
-    const { refreshToken } = await connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
-
-    await refreshToken()
-}
-
-module.exports = { vercelRefresh, cronRefresh }

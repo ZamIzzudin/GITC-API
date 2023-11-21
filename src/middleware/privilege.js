@@ -19,7 +19,7 @@ const guest = (req, res, next) => {
                     message: 'failed',
                     info: 'expired token'
                 });
-            } else if (decoded.role.toLowerCase() !== 'Guest') {
+            } else if (decoded.role.toLowerCase() !== 'guest') {
                 return res.status(401).json({
                     status: 401,
                     message: 'failed',
@@ -59,7 +59,7 @@ const admin = (req, res, next) => {
                     message: 'failed',
                     info: 'expired token'
                 });
-            } else if (decoded.role.toLowerCase() !== 'Admin') {
+            } else if (decoded.role.toLowerCase() !== 'admin') {
                 return res.status(401).json({
                     status: 401,
                     message: 'failed',
@@ -99,7 +99,7 @@ const admins = (req, res, next) => {
                     message: 'failed',
                     info: 'expired token'
                 });
-            } else if (decoded.role.toLowerCase() !== 'Admin' || decoded.role.toLowerCase() !== 'Sysadmin') {
+            } else if (decoded.role.toLowerCase() !== 'admin' || decoded.role.toLowerCase() !== 'sysadmin') {
                 return res.status(401).json({
                     status: 401,
                     message: 'failed',
@@ -140,7 +140,7 @@ const sysadmin = (req, res, next) => {
                     message: 'failed',
                     info: 'expired token'
                 });
-            } else if (decoded.role.toLowerCase() !== 'Sysadmin') {
+            } else if (decoded.role.toLowerCase() !== 'sysadmin') {
                 return res.status(401).json({
                     status: 401,
                     message: 'failed',
@@ -180,7 +180,7 @@ const pic = (req, res, next) => {
                     message: 'failed',
                     info: 'expired token'
                 });
-            } else if (decoded.role.toLowerCase() !== 'PIC') {
+            } else if (decoded.role.toLowerCase() !== 'pic') {
                 return res.status(401).json({
                     status: 401,
                     message: 'failed',

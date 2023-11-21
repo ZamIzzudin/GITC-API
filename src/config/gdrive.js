@@ -10,10 +10,12 @@ async function connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI) {
 
     try {
         await get().then((credential) => {
+            console.log('Success to get credentials')
             oauth2Client.setCredentials(credential)
         })
     } catch {
         console.log('Failed to get credentials')
+        connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
     }
 
     const drive = google.drive({
