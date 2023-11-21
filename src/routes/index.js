@@ -20,7 +20,7 @@ routes.get('/', (req, res) => {
 routes.use('/auth', auth)
 routes.use('/offer', offer)
 routes.use('/confirm', confirm)
-route.use('/refreshToken', refresh)
+routes.use('/refreshToken', refresh)
 
 routes.post('/oth/upload/:id_letter', upload)
 
