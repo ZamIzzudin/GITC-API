@@ -28,7 +28,7 @@ async function connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI) {
             } else {
                 update(tokens)
                 oauth2Client.setCredentials(tokens)
-                console.log('Success renew token')
+                return tokens
             }
         })
     }
