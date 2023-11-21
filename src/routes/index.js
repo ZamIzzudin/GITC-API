@@ -1,6 +1,7 @@
 // Setup express Router
 const routes = require('express').Router()
 // const gauth = require('./gauth')
+const refresh = require('../crons/refreshGoogleToken')
 const auth = require('./auth')
 const offer = require('./offer')
 const confirm = require('./confirm')
@@ -19,6 +20,7 @@ routes.get('/', (req, res) => {
 routes.use('/auth', auth)
 routes.use('/offer', offer)
 routes.use('/confirm', confirm)
+route.use('/refreshToken', refresh)
 
 routes.post('/oth/upload/:id_letter', upload)
 
