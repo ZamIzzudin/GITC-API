@@ -2,13 +2,33 @@ const Confirm = require('../models/confirms')
 const { getLatestNumber, updateLatestNumber } = require('./increment.js')
 
 const confirm_list = async (req, res) => {
+    const { page } = req.params
+    const { search } = req.body
     try {
-        const confirms = await Confirm.find()
+        let query = {}
+        const limit = 10
+
+        if (search) {
+            query = {
+                $or: [
+                    { 'nama_tertuju': { '$regex': search, '$options': 'i' } },
+                    { 'status': { '$regex': search, '$options': 'i' } }
+                ]
+            }
+        }
+
+        const confirms = await Confirm.find(query).limit(limit).skip((page - 1) * limit).exec();
+
+        const totalData = await Confirm.countDocuments(query);
+        const totalPages = Math.ceil(totalData / limit);
+
 
         if (confirms.length > 0 && confirms !== null) {
             res.status(200).json({
                 status: 200,
-                data: confirms
+                data: confirms,
+                current_page: page,
+                total_page: totalPages
             })
         } else {
             res.status(200).json({

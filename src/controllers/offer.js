@@ -2,14 +2,32 @@ const Offer = require('../models/offers')
 const { getLatestNumber, updateLatestNumber } = require('./increment.js')
 
 const offer_list = async (req, res) => {
+    const { page } = req.params
+    const { search } = req.body
     try {
+        let query = {}
+        const limit = 10
 
-        const offers = await Offer.find()
+        if (search) {
+            query = {
+                $or: [
+                    { 'nama_tertuju': { '$regex': search, '$options': 'i' } },
+                    { 'status': { '$regex': search, '$options': 'i' } }
+                ]
+            }
+        }
+
+        const offers = await Offer.find(query).limit(limit).skip((page - 1) * limit).exec();
+
+        const totalData = await Offer.countDocuments(query);
+        const totalPages = Math.ceil(totalData / limit);
 
         if (offers.length > 0 && offers !== null) {
             res.status(200).json({
                 status: 200,
-                data: offers
+                data: offers,
+                current_page: page,
+                total_page: totalPages
             })
         } else {
             res.status(200).json({
