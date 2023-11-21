@@ -14,7 +14,7 @@
     ],
     "crons": [
         {
-            "path": "/refreshToken",
+            "path": "/src/crons/refreshGoogleToken",
             "schedule": "0 5 * * *"
         }
     ]
