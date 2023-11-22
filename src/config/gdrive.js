@@ -30,7 +30,7 @@ async function connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI) {
             } else {
                 update(tokens)
                 oauth2Client.setCredentials(tokens)
-                return tokens
+                return 'ok'
             }
         })
     }
