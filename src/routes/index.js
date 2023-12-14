@@ -7,6 +7,8 @@ const offer = require('./offer')
 const confirm = require('./confirm')
 
 const { upload } = require('../controllers/uploader')
+const { admins } = require('../middleware/privilege')
+
 
 // Default
 routes.get('/', (req, res) => {
@@ -22,7 +24,7 @@ routes.use('/offer', offer)
 routes.use('/confirm', confirm)
 routes.get('/api/cron', refresh)
 
-routes.post('/oth/upload/:id_letter', upload)
+routes.post('/oth/upload/:id_letter', admins, upload)
 
 routes.get('*', (req, res) => {
     res.json({

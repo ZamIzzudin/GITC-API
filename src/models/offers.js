@@ -8,7 +8,10 @@ const offer_scheme = new mongoose.Schema({
         default: 'unset'
     },
     perihal: String,
+    nama_perusahaan: String,
+    alamat_perusahaan: String,
     nama_tertuju: String,
+    jabatan_tertuju: String,
     media_referensi: {
         type: String,
         enum: ["Email", "Telepon", "Perjanjian Kerja Sama", "Kesepakatan Pada Tanggal"],
@@ -16,14 +19,21 @@ const offer_scheme = new mongoose.Schema({
     },
     tanggal_referensi: Date,
     jenis_permohonan: String,
-    produk: [],
+    jumlah_produk: Number,
+    category: String,
+    sub_category: String,
+    produk: {
+        type: Array,
+        default: []
+    },
     tanggal_kegiatan: Date,
     total_harga: Number,
     nominal_terbilang: String,
+    jumlah_tnc: Number,
     term_n_condition: String,
     approver: {
-        type: String,
-        default: "unset"
+        type: Array,
+        default: []
     },
     submitted_by: String,
     revisi: {
@@ -43,7 +53,8 @@ const offer_scheme = new mongoose.Schema({
     created_at: {
         type: Date,
         default: new Date()
-    }
+    },
+    catatan: String
 })
 
 const Offer = mongoose.model("Offer", offer_scheme)

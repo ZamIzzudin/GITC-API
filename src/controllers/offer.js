@@ -47,6 +47,34 @@ const offer_list = async (req, res) => {
     }
 }
 
+const offer_detail = async (req, res) => {
+    const { id_letter } = req.params
+
+    try {
+        const offer = await Offer.find({ _id: id_letter })
+
+        if (offer) {
+            res.status(200).json({
+                status: 200,
+                data: offer
+            })
+        } else {
+            res.status(400).json({
+                status: 400,
+                message: 'Offering Letter Not Found',
+            })
+        }
+
+    } catch (error) {
+        console.log(error.message)
+        res.status(404).json({
+            status: 404,
+            message: 'failed',
+            info: 'Server failed'
+        })
+    }
+}
+
 const create = async (req, res) => {
     const body = req.body
 
@@ -56,15 +84,21 @@ const create = async (req, res) => {
             tanggal_surat: body.tanggal_surat,
             perihal: body.perihal,
             nama_tertuju: body.nama_tertuju,
-            media_referensi: body.media_referensi,
-            tanggal_referensi: body.tanggal_referensi,
+            media_referensi: body.media_ref,
+            tanggal_referensi: body.tanggal_ref,
             jenis_permohonan: body.jenis_permohonan,
-            produk: body.produk,
-            template: body.template,
-            tanggal_kegiatan: body.tanggal_kegiatan,
-            total_harga: body.total_harga,
-            nominal_terbilang: body.nominal_terbilang,
-            term_n_condition: body.term_n_condition,
+            produk: body.produk_forms,
+            jumlah_produk: body.produk_forms.length,
+            total_harga: body.total_biaya,
+            nominal_terbilang: " ",
+            term_n_condition: body.TNC,
+            jabatan_tertuju: body.jabatan,
+            nama_perusahaan: body.nama_perusahaan,
+            alamat_perusahaan: body.alamat_perusahaan,
+            category: body.category,
+            sub_category: body.sub_category,
+            jumlah_tnc: body.TNC.length,
+            catatan: body.catatan,
             submitted_by: body.submitted_by,
         }
 
@@ -174,15 +208,21 @@ const resubmit = async (req, res) => {
             tanggal_surat: body.tanggal_surat,
             perihal: body.perihal,
             nama_tertuju: body.nama_tertuju,
-            media_referensi: body.media_referensi,
-            tanggal_referensi: body.tanggal_referensi,
+            media_referensi: body.media_ref,
+            tanggal_referensi: body.tanggal_ref,
             jenis_permohonan: body.jenis_permohonan,
-            template: body.template,
-            produk: body.produk,
-            tanggal_kegiatan: body.tanggal_kegiatan,
-            total_harga: body.total_harga,
-            nominal_terbilang: body.nominal_terbilang,
-            term_n_condition: body.term_n_condition,
+            produk: body.produk_forms,
+            jumlah_produk: body.produk_forms.length,
+            total_harga: body.total_biaya,
+            nominal_terbilang: " ",
+            term_n_condition: body.TNC,
+            jabatan_tertuju: body.jabatan,
+            nama_perusahaan: body.nama_perusahaan,
+            alamat_perusahaan: body.alamat_perusahaan,
+            category: body.category,
+            sub_category: body.sub_category,
+            jumlah_tnc: body.TNC.length,
+            catatan: body.catatan,
             submitted_by: body.submitted_by,
             status: 'submitted'
         }
@@ -314,4 +354,4 @@ const print = async (req, res) => {
 }
 
 
-module.exports = { offer_list, create, approve, revision, resubmit, reject, remove, print }
+module.exports = { offer_list, offer_detail, create, approve, revision, resubmit, reject, remove, print }
