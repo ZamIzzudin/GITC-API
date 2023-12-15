@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const offer_scheme = new mongoose.Schema({
     nama_penerbit: String,
-    tanggal_surat: Date,
+    tanggal_surat: String,
     nomor_surat: {
         type: String,
         default: 'unset'
@@ -17,7 +17,7 @@ const offer_scheme = new mongoose.Schema({
         enum: ["Email", "Telepon", "Perjanjian Kerja Sama", "Kesepakatan Pada Tanggal"],
         default: ["Email"]
     },
-    tanggal_referensi: Date,
+    tanggal_referensi: String,
     jenis_permohonan: String,
     jumlah_produk: Number,
     category: String,
@@ -26,7 +26,6 @@ const offer_scheme = new mongoose.Schema({
         type: Array,
         default: []
     },
-    tanggal_kegiatan: Date,
     total_harga: Number,
     nominal_terbilang: String,
     jumlah_tnc: Number,
