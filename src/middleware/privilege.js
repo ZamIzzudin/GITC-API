@@ -99,7 +99,7 @@ const admins = (req, res, next) => {
                     message: 'failed',
                     info: 'expired token'
                 });
-            } else if (decoded.role.toLowerCase() !== 'admin' || decoded.role.toLowerCase() !== 'sysadmin') {
+            } else if (decoded.role.toLowerCase() !== 'admin' && decoded.role.toLowerCase() !== 'sysadmin') {
                 return res.status(401).json({
                     status: 401,
                     message: 'failed',
