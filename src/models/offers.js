@@ -29,7 +29,10 @@ const offer_scheme = new mongoose.Schema({
     total_harga: Number,
     nominal_terbilang: String,
     jumlah_tnc: Number,
-    term_n_condition: String,
+    term_n_condition: {
+        type: Array,
+        default: []
+    },
     approver: {
         type: Array,
         default: []
