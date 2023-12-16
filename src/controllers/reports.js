@@ -8,9 +8,9 @@ const get_report_per_month = async (req, res) => {
 
         if (reports) {
             // Sort
-            const top_percentage_rank = reports.detail.sort((curr, prev) => prev.percentage - curr.percentage).slice(0, 5).map((item => { return { category: item.category, sub_category: item.sub_category, percentage: item.percentage, unit: item.unit, revanue: item.revanue } }))
-            const top_revanue_rank = reports.detail.sort((curr, prev) => prev.revanue - curr.revanue).slice(0, 5).map((item => { return { category: item.category, sub_category: item.sub_category, percentage: item.percentage, unit: item.unit, revanue: item.revanue } }))
-            const top_unit_rank = reports.detail.sort((curr, prev) => prev.unit - curr.unit).slice(0, 5).map((item => { return { category: item.category, sub_category: item.sub_category, percentage: item.percentage, unit: item.unit, revanue: item.revanue } }))
+            const top_percentage_rank = reports.detail.sort((curr, prev) => prev.percentage - curr.percentage).slice(0, 4).map((item => { return { category: item.category, sub_category: item.sub_category, percentage: item.percentage, unit: item.unit, revanue: item.revanue } }))
+            const top_revanue_rank = reports.detail.sort((curr, prev) => prev.revanue - curr.revanue).slice(0, 4).map((item => { return { category: item.category, sub_category: item.sub_category, percentage: item.percentage, unit: item.unit, revanue: item.revanue } }))
+            const top_unit_rank = reports.detail.sort((curr, prev) => prev.unit - curr.unit).slice(0, 4).map((item => { return { category: item.category, sub_category: item.sub_category, percentage: item.percentage, unit: item.unit, revanue: item.revanue } }))
 
             res.status(200).json({
                 bulan: reports.bulan,
@@ -62,8 +62,8 @@ const get_report_per_year = async (req, res) => {
             })
 
             // Sort
-            const top_revanue_rank = reports.sort((curr, prev) => prev.total_revanue - curr.total_revanue).slice(0, 5).map((item => { return { bulan: item.bulan, total_revanue: item.total_revanue, total_unit: item.total_unit } }))
-            const top_unit_rank = reports.sort((curr, prev) => prev.total_unit - curr.total_unit).slice(0, 5).map((item => { return { bulan: item.bulan, total_revanue: item.total_revanue, total_unit: item.total_unit } }))
+            const top_revanue_rank = reports.sort((curr, prev) => prev.total_revanue - curr.total_revanue).slice(0, 4).map((item => { return { bulan: item.bulan, total_revanue: item.total_revanue, total_unit: item.total_unit } }))
+            const top_unit_rank = reports.sort((curr, prev) => prev.total_unit - curr.total_unit).slice(0, 4).map((item => { return { bulan: item.bulan, total_revanue: item.total_revanue, total_unit: item.total_unit } }))
 
             res.status(200).json({
                 status: 200,
