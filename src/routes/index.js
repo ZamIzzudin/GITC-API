@@ -1,10 +1,11 @@
 // Setup express Router
 const routes = require('express').Router()
-// const gauth = require('./gauth')
+const gauth = require('./gauth')
 const refresh = require('../api/cron')
 const auth = require('./auth')
 const offer = require('./offer')
 const confirm = require('./confirm')
+const report = require('./reports')
 
 const { upload } = require('../controllers/uploader')
 const { admins } = require('../middleware/privilege')
@@ -18,13 +19,14 @@ routes.get('/', (req, res) => {
     })
 })
 
-// routes.use('/google', gauth)
+routes.use('/google', gauth)
 routes.use('/auth', auth)
 routes.use('/offer', offer)
 routes.use('/confirm', confirm)
+routes.use('/report', report)
 routes.get('/api/cron', refresh)
 
-routes.post('/oth/upload/:id_letter', admins, upload)
+routes.post('/utils/upload', admins, upload)
 
 routes.get('*', (req, res) => {
     res.json({

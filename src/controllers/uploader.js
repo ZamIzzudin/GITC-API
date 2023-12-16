@@ -1,5 +1,6 @@
 const Offer = require('../models/offers')
 const Confirm = require('../models/confirms')
+const Report = require('../models/reports')
 
 const { getLatestNumber, updateLatestNumber } = require('./increment.js')
 
@@ -8,16 +9,21 @@ const config = require('../config/config.js')
 const fs = require('fs');
 
 const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } = config
-const { drive } = connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
 
 const driveMap = {
     offer: {
+        2020: '1uRmnLmH22d2oU0oEl2PJfmmPsLRYGbkA',
+        2021: '11pqL5AK9jArrAAtyP05l9F2r2r8wYJ4-',
+        2022: '1LgwhPEF_OB3_tTN_spl8O2uc7YMdkAYX',
         2023: '1464WA78O6yQPgtXsBVEqUkqghxIn69X3',
         2024: '1pc8dsq-Teeplvsu_zF_cPmcvppX9PFfo',
         2025: '1oNWUqZKskaZaoeR34M7ZSA83IY7ehar-',
         2026: '1jX4P6VP715bi2K1Rj1pTg_w4chwolKoP',
     },
     confirm: {
+        2020: '1cn2Paf9Sebk_5QVAauccpV_2EfG7PsE9',
+        2021: '18OLnc4cPvXyUWi-aU2i1bZJXhXXJn57r',
+        2022: '1u_9jwnxDyEG5687b8Kbc-8wOnpvZo4YH',
         2023: '12t3dTnaSBG_zXBI0QpHCbBymJ2j60TKZ',
         2024: '1Hw859_o9h_QA8PyFw0k4d_8v-7x2DDUX',
         2025: '1NPDcyCpflUv78BOWpApJDkzBnVfZtY3W',
@@ -26,16 +32,94 @@ const driveMap = {
     other: '1y6moMmyuagvR_speQVQVZ80nCz0lUusx'
 }
 
-const handleOther = async () => {
+const handleOther = async (nomor_surat) => {
     try {
-        const latest = await getLatestNumber()
-        await updateLatestNumber(latest.latest_number + 1)
+        const latest_on_DB = await getLatestNumber()
+        const current_number = nomor_surat > latest_on_DB.latest_number && nomor_surat !== 0 ? nomor_surat : latest_on_DB.latest_number
+        await updateLatestNumber(current_number)
     } catch (err) {
         console.error(err.message)
     }
 }
 
-const handletter = async (type, id_letter, id_drive) => {
+const handleReport = async (data) => {
+    const { category, produk } = data
+
+    const report_setup = produk.map(item => {
+        return {
+            category,
+            tahun: item.tanggal_kegiatan.split(' ')[2],
+            bulan: item.tanggal_kegiatan.split(' ')[1],
+            unit: item.jumlah_peserta,
+            revanue: item.total_biaya_kegiatan
+        }
+    })
+
+    report_setup.forEach(async item => {
+        const report = await Report.findOne({ tahun: item.tahun, bulan: { '$regex': item.bulan, '$options': 'i' } })
+
+        if (report !== null) {
+            const updated_revanue = report.total_revanue += item.revanue
+            const updated_unit = report.total_unit += parseInt(item.unit)
+            let updated_detail = [...report.detail]
+
+            const is_exist = updated_detail.findIndex(detail => detail.category === item.category)
+
+            if (is_exist >= 0) {
+                updated_detail[is_exist] = {
+                    ...updated_detail[is_exist],
+                    unit: parseInt(updated_detail[is_exist].unit) + parseInt(item.unit),
+                    revanue: updated_detail[is_exist].revanue += item.revanue
+                }
+            } else {
+                updated_detail.push({
+                    category: item.category,
+                    percentage: 100,
+                    unit: parseInt(item.unit),
+                    revanue: item.revanue
+                })
+            }
+
+            // Setup Percentage
+            const fixed_detail = updated_detail.map(detail => {
+                return {
+                    category: detail.category,
+                    percentage: Math.round(detail.unit / updated_unit * 100),
+                    unit: detail.unit,
+                    revanue: detail.revanue
+                }
+            })
+
+            const payload = {
+                total_revanue: updated_revanue,
+                total_unit: updated_unit,
+                detail: fixed_detail
+            }
+
+            await Report.updateOne({ tahun: item.tahun, bulan: { '$regex': item.bulan, '$options': 'i' } }, payload)
+
+        } else {
+            const payload = {
+                tahun: item.tahun,
+                bulan: item.bulan,
+                total_revanue: item.revanue,
+                total_unit: item.unit,
+                detail: [
+                    {
+                        category: item.category,
+                        percentage: 100,
+                        unit: item.unit,
+                        revanue: item.revanue
+                    }
+                ]
+            }
+
+            await Report.create(payload)
+        }
+    })
+}
+
+const handleLetter = async (type, id_letter, id_drive) => {
     try {
         const payload = {
             status: 'done',
@@ -44,14 +128,18 @@ const handletter = async (type, id_letter, id_drive) => {
 
         if (type === 'confirm') {
             const doneConfirm = await Confirm.updateOne({ _id: id_letter }, payload)
+            const detailConfirm = await Confirm.findOne({ _id: id_letter })
 
+            handleReport(detailConfirm)
             if (!doneConfirm.modifiedCount) {
                 throw new Error('Failed to Update status')
             }
-        } else if (type === 'offer') {
-            const doneConfirm = await Offer.updateOne({ _id: id_letter }, payload)
 
-            if (!doneConfirm.modifiedCount) {
+
+        } else if (type === 'offer') {
+            const doneOffer = await Offer.updateOne({ _id: id_letter }, payload)
+
+            if (!doneOffer.modifiedCount) {
                 throw new Error('Failed to Update status')
             }
         } else {
@@ -63,8 +151,8 @@ const handletter = async (type, id_letter, id_drive) => {
 }
 
 const upload = async (req, res) => {
-    const { id_letter } = req.params
-    const { type, year } = req.body
+    const { drive } = await connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
+    const { type, year, id_letter = null, nomor_surat = null } = req.body
 
     const id_folder = type === 'other' ? driveMap[type] : driveMap[type][year] // Get Folder Number
 
@@ -102,11 +190,12 @@ const upload = async (req, res) => {
         // remove temp
         fs.unlinkSync(tempFilePath)
 
-        // Update Increment
-        if (type === 'other') {
-            await handleOther()
+        if (type === 'other' && !id_letter) {
+            // Update Increment
+            await handleOther(nomor_surat * 1)
         } else {
-            await handletter(type, id_letter, uploadedFile.data.id)
+            // Update Status
+            await handleLetter(type, id_letter, uploadedFile.data.id)
         }
 
         res.status(200).json({

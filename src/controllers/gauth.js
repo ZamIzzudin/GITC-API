@@ -5,9 +5,10 @@ const { update } = require('../controllers/credential')
 const config = require('../config/config.js')
 
 const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } = config
-const { oauth2Client: oauth, drive } = connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
 
-const auth = (req, res) => {
+const auth = async (req, res) => {
+    const { oauth2Client: oauth } = await connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
+
     const url = oauth.generateAuthUrl({
         access_type: 'offline',
         scope: [
@@ -19,6 +20,8 @@ const auth = (req, res) => {
 }
 
 const redirect = async (req, res) => {
+    const { oauth2Client: oauth } = await connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
+
     const { code } = req.query
     const { tokens } = await oauth.getToken(code)
     oauth.setCredentials(tokens)
@@ -27,6 +30,7 @@ const redirect = async (req, res) => {
 }
 
 const driveList = async (req, res) => {
+    const { drive } = await connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
     const { id_folder } = req.params
 
     let query = {}
@@ -42,6 +46,7 @@ const driveList = async (req, res) => {
 }
 
 const upload = async (req, res) => {
+    const { drive } = await connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
     const { id_folder } = req.params
 
     if (!req.files || Object.keys(req.files).length === 0) {
@@ -93,7 +98,9 @@ const upload = async (req, res) => {
 }
 
 const webView = async (req, res) => {
+    const { drive } = await connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
     const { id_file } = req.params
+
     try {
         const file = await drive.files.get({ fileId: id_file, fields: 'webViewLink', })
         const fileUrl = file.data.webViewLink;
@@ -105,7 +112,9 @@ const webView = async (req, res) => {
 }
 
 const download = async (req, res) => {
+    const { drive } = await connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
     const { id_file } = req.params;
+
     try {
         const meta = await drive.files.get({ fileId: id_file, fields: 'name', })
         const file = await drive.files.get({ fileId: id_file, alt: 'media', fields: 'name' }, { responseType: 'stream' })
@@ -134,7 +143,9 @@ const download = async (req, res) => {
 }
 
 const remove = async (req, res) => {
+    const { drive } = await connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
     const { id_file } = req.params
+
     try {
         await drive.files.delete({ fileId: id_file });
         res.status(200).json({

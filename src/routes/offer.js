@@ -1,6 +1,5 @@
 const offer = require('express').Router()
 const { offer_list, offer_detail, create, approve, resubmit, revision, reject, remove, print } = require('../controllers/offer')
-const { upload } = require('../controllers/uploader')
 const { islogin, admins, pic } = require('../middleware/privilege')
 
 // READ
@@ -9,7 +8,6 @@ offer.get('/detail/:id_letter', islogin, offer_detail)
 
 // CREATE
 offer.post('/', admins, create)
-offer.post('/upload/:id_letter', admins, upload)
 
 // UPDATE
 offer.put('/approve/:id_letter', pic, approve)

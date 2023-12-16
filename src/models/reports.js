@@ -6,9 +6,14 @@ const report_scheme = new mongoose.Schema({
     total_revanue: Number,
     total_unit: Number,
     detail: {
-        unit: {},
-        revanue: {}
-    }
+        type: Array,
+        default: {
+            category: String,
+            percentage: Number,
+            unit: Number,
+            revanue: Number
+        }
+    },
 })
 
 const Report = mongoose.model("Report", report_scheme)
