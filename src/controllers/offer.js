@@ -3,7 +3,7 @@ const { getLatestNumber, updateLatestNumber } = require('./increment.js')
 
 const offer_list = async (req, res) => {
     try {
-        const offers = await Offer.find(query)
+        const offers = await Offer.find()
         if (offers.length > 0 && offers !== null) {
             res.status(200).json({
                 status: 200,
