@@ -11,25 +11,25 @@ const confirm_scheme = new mongoose.Schema({
     nama_perusahaan: String,
     alamat_perusahaan: String,
     nama_tertuju: String,
-    jabatan_tertuju: String,
-    media_referensi: {
+    jabatan: String,
+    media_ref: {
         type: String,
         enum: ["Email", "Telepon", "Perjanjian Kerja Sama", "Kesepakatan Pada Tanggal"],
         default: ["Email"]
     },
-    tanggal_referensi: String,
+    tanggal_ref: String,
     jenis_permohonan: String,
     jumlah_produk: Number,
     category: String,
     sub_category: String,
-    produk: {
+    produk_forms: {
         type: Array,
         default: []
     },
-    total_harga: Number,
+    total_biaya: Number,
     nominal_terbilang: String,
     jumlah_tnc: Number,
-    term_n_condition: {
+    TNC: {
         type: Array,
         default: []
     },
