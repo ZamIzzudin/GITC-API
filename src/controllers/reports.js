@@ -23,8 +23,8 @@ const get_report_per_month = async (req, res) => {
                 details: reports.detail
             })
         } else[
-            res.status(204).json({
-                status: 204,
+            res.status(200).json({
+                status: 200,
                 bulan: month,
                 details: [],
                 tahun: year,
@@ -66,6 +66,7 @@ const get_report_per_year = async (req, res) => {
             const top_unit_rank = reports.sort((curr, prev) => prev.total_unit - curr.total_unit).slice(0, 5).map((item => { return { bulan: item.bulan, total_revanue: item.total_revanue, total_unit: item.total_unit } }))
 
             res.status(200).json({
+                status: 200,
                 tahun: year,
                 total_revanue,
                 total_unit,
@@ -73,8 +74,8 @@ const get_report_per_year = async (req, res) => {
                 top_unit_rank,
             })
         } else {
-            res.status(204).json({
-                status: 204,
+            res.status(200).json({
+                status: 200,
                 message: "There's no data found, try to add data first",
                 tahun: year,
                 total_revanue: 0,
