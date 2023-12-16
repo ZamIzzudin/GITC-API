@@ -57,7 +57,13 @@ const confirm_scheme = new mongoose.Schema({
         default: new Date()
     },
     option: String,
-    catatan: String
+    catatan: String,
+    kurs_USD: Number,
+    konversi_kursUSD: {
+        type: String,
+        enum: ['Ya', 'Tidak'],
+        default: 'Ya'
+    }
 })
 
 const Confirm = mongoose.model("Confirm", confirm_scheme)

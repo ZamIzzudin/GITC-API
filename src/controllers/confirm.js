@@ -92,7 +92,7 @@ const create = async (req, res) => {
             produk: body.produk_forms,
             jumlah_produk: body.produk_forms.length,
             total_harga: body.total_biaya,
-            nominal_terbilang: " ",
+            nominal_terbilang: body.nominal_terbilang,
             term_n_condition: body.TNC,
             jabatan_tertuju: body.jabatan,
             nama_perusahaan: body.nama_perusahaan,
@@ -102,6 +102,8 @@ const create = async (req, res) => {
             jumlah_tnc: body.TNC.length,
             catatan: body.catatan,
             submitted_by: body.submitted_by,
+            kurs_USD: body.kurs_USD,
+            konversi_kursUSD: body.konversi_kursUSD
         }
 
         const new_confirm = await Confirm.create(payload)
@@ -217,7 +219,7 @@ const resubmit = async (req, res) => {
             produk: body.produk_forms,
             jumlah_produk: body.produk_forms.length,
             total_harga: body.total_biaya,
-            nominal_terbilang: " ",
+            nominal_terbilang: body.nominal_terbilang,
             term_n_condition: body.TNC,
             jabatan_tertuju: body.jabatan,
             nama_perusahaan: body.nama_perusahaan,
@@ -227,6 +229,8 @@ const resubmit = async (req, res) => {
             jumlah_tnc: body.TNC.length,
             catatan: body.catatan,
             submitted_by: body.submitted_by,
+            kurs_USD: body.kurs_USD,
+            konversi_kursUSD: body.konversi_kursUSD,
             status: 'submitted'
         }
 
