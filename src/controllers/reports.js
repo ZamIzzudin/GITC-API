@@ -7,9 +7,9 @@ const get_report_per_month = async (req, res) => {
         const reports = await Report.findOne({ tahun: year, bulan: { '$regex': month, '$options': 'i' } })
 
         // Sort
-        const top_percentage_rank = reports.detail.sort((curr, prev) => prev.percentage - curr.percentage).slice(0, 5).map((item => { return { category: item.category, percentage: item.percentage, unit: item.unit, revanue: item.revanue } }))
-        const top_revanue_rank = reports.detail.sort((curr, prev) => prev.revanue - curr.revanue).slice(0, 5).map((item => { return { category: item.category, percentage: item.percentage, unit: item.unit, revanue: item.revanue } }))
-        const top_unit_rank = reports.detail.sort((curr, prev) => prev.unit - curr.unit).slice(0, 5).map((item => { return { category: item.category, percentage: item.percentage, unit: item.unit, revanue: item.revanue } }))
+        const top_percentage_rank = reports.detail.sort((curr, prev) => prev.percentage - curr.percentage).slice(0, 5).map((item => { return { category: item.category, sub_category: item.sub_category, percentage: item.percentage, unit: item.unit, revanue: item.revanue } }))
+        const top_revanue_rank = reports.detail.sort((curr, prev) => prev.revanue - curr.revanue).slice(0, 5).map((item => { return { category: item.category, sub_category: item.sub_category, percentage: item.percentage, unit: item.unit, revanue: item.revanue } }))
+        const top_unit_rank = reports.detail.sort((curr, prev) => prev.unit - curr.unit).slice(0, 5).map((item => { return { category: item.category, sub_category: item.sub_category, percentage: item.percentage, unit: item.unit, revanue: item.revanue } }))
 
         res.json({
             bulan: reports.bulan,
@@ -18,7 +18,8 @@ const get_report_per_month = async (req, res) => {
             total_unit: reports.total_unit,
             top_percentage_rank,
             top_revanue_rank,
-            top_unit_rank
+            top_unit_rank,
+            details: reports.detail
         })
     } catch (error) {
         console.log(error.message)

@@ -9,6 +9,7 @@ const report_scheme = new mongoose.Schema({
         type: Array,
         default: {
             category: String,
+            sub_category: String,
             percentage: Number,
             unit: Number,
             revanue: Number

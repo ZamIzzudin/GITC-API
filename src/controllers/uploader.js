@@ -43,11 +43,12 @@ const handleOther = async (nomor_surat) => {
 }
 
 const handleReport = async (data) => {
-    const { category, produk } = data
+    const { category, sub_category, produk } = data
 
     const report_setup = produk.map(item => {
         return {
             category,
+            sub_category,
             tahun: item.tanggal_kegiatan.split(' ')[2],
             bulan: item.tanggal_kegiatan.split(' ')[1],
             unit: item.jumlah_peserta,
@@ -74,6 +75,7 @@ const handleReport = async (data) => {
             } else {
                 updated_detail.push({
                     category: item.category,
+                    sub_category: item.sub_category,
                     percentage: 100,
                     unit: parseInt(item.unit),
                     revanue: item.revanue
@@ -84,6 +86,7 @@ const handleReport = async (data) => {
             const fixed_detail = updated_detail.map(detail => {
                 return {
                     category: detail.category,
+                    sub_category: detail.sub_category,
                     percentage: Math.round(detail.unit / updated_unit * 100),
                     unit: detail.unit,
                     revanue: detail.revanue
@@ -107,6 +110,7 @@ const handleReport = async (data) => {
                 detail: [
                     {
                         category: item.category,
+                        sub_category: item.sub_category,
                         percentage: 100,
                         unit: item.unit,
                         revanue: item.revanue

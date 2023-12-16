@@ -179,10 +179,15 @@ const register = async (req, res) => {
 
 const adjust = async (req, res) => {
     const { id } = req.params
-    const { role } = req.body
+    const { role = null, username = null, display_name = null, password = null } = req.body
 
     try {
-        const user = await User.updateOne({ _id: id }, { role })
+        let new_password = ''
+        if (password) {
+            new_password = await encrpyt_one_way(password)
+        }
+
+        const user = await User.updateOne({ _id: id }, { role, username, display_name, password: new_password })
 
         // when data user is not found
         if (!user.modifiedCount) {
