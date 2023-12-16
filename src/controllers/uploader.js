@@ -45,12 +45,14 @@ const handleOther = async (nomor_surat) => {
 const handleReport = async (data) => {
     const { category, sub_category, produk } = data
 
+    const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
+
     const report_setup = produk.map(item => {
         return {
             category,
             sub_category,
-            tahun: item.tanggal_kegiatan.split(' ')[2],
-            bulan: item.tanggal_kegiatan.split(' ')[1],
+            tahun: item.tanggal_kegiatan.split('-')[0],
+            bulan: months[item.tanggal_kegiatan.split('-')[1]],
             unit: item.jumlah_peserta,
             revanue: item.total_biaya_kegiatan
         }
