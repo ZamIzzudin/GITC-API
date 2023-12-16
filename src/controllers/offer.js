@@ -51,7 +51,7 @@ const offer_detail = async (req, res) => {
     const { id_letter } = req.params
 
     try {
-        const offer = await Offer.find({ _id: id_letter })
+        const offer = await Offer.findOne({ _id: id_letter })
 
         if (offer) {
             res.status(200).json({

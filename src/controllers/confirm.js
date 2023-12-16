@@ -52,7 +52,7 @@ const confirm_detail = async (req, res) => {
     const { id_letter } = req.params
 
     try {
-        const confirm = await Confirm.find({ _id: id_letter })
+        const confirm = await Confirm.findOne({ _id: id_letter })
 
         if (confirm) {
             res.status(200).json({
