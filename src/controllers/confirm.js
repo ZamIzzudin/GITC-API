@@ -1,5 +1,6 @@
 const Confirm = require('../models/confirms')
 const { getLatestNumber, updateLatestNumber } = require('./increment.js')
+const products = require('../libs/product.json')
 
 const confirm_list = async (req, res) => {
 
@@ -62,7 +63,7 @@ const create = async (req, res) => {
 
     try {
         const payload = {
-            option: body.template_option,
+            template_option: body.template_option,
             nama_penerbit: body.nama_penerbit,
             tanggal_surat: body.tanggal_surat,
             perihal: body.perihal,
@@ -189,7 +190,7 @@ const resubmit = async (req, res) => {
 
     try {
         const payload = {
-            option: body.template_option,
+            template_option: body.template_option,
             nama_penerbit: body.nama_penerbit,
             tanggal_surat: body.tanggal_surat,
             perihal: body.perihal,
@@ -308,13 +309,28 @@ const print = async (req, res) => {
     const { id_letter } = req.params
 
     try {
+        const confirm = await Confirm.findOne({ _id: id_letter })
         const latestNumber = await getLatestNumber()
 
+        let sub_category = null
+
+        products.categories.forEach(product => {
+            if (product.name === confirm.category) {
+                product.subcategories.forEach(sub => {
+                    if (sub.name === confirm.sub_category) {
+                        sub_category = sub.code
+                    }
+                })
+            }
+        })
+
+        const setup_no_surat = 'CL' + sub_category + latestNumber.cl_latest_number + confirm.tanggal_surat.split('-')[2] + confirm.tanggal_surat.split('-')[1]
+
         const payload = {
-            nomor_surat: latestNumber.latest_template,
+            nomor_surat: setup_no_surat,
         }
 
-        await updateLatestNumber(latestNumber.latest_number + 1)
+        await updateLatestNumber('confirm', latestNumber.cl_latest_number + 1)
 
         const printed = await Confirm.updateOne({ _id: id_letter }, payload)
 

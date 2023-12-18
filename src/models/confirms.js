@@ -56,7 +56,7 @@ const confirm_scheme = new mongoose.Schema({
         type: Date,
         default: new Date()
     },
-    option: String,
+    template_option: String,
     catatan: String,
     kurs_USD: Number,
     konversi_kursUSD: {

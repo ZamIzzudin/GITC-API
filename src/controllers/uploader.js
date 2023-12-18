@@ -1,8 +1,9 @@
 const Offer = require('../models/offers')
 const Confirm = require('../models/confirms')
 const Report = require('../models/reports')
+// const product = require('../libs/product.json')
 
-const { getLatestNumber, updateLatestNumber } = require('./increment.js')
+// const { getLatestNumber, updateLatestNumber } = require('./increment.js')
 
 const connector = require('../config/gdrive.js')
 const config = require('../config/config.js')
@@ -32,11 +33,15 @@ const driveMap = {
     other: '1y6moMmyuagvR_speQVQVZ80nCz0lUusx'
 }
 
-const handleOther = async (nomor_surat) => {
+const handleOther = async (metadata, filePath) => {
     try {
-        const latest_on_DB = await getLatestNumber()
-        const current_number = nomor_surat > latest_on_DB.latest_number && nomor_surat !== 0 ? nomor_surat : latest_on_DB.latest_number
-        await updateLatestNumber(current_number)
+        metadata[drive_id] = filePath
+
+        if (metadata.type === 'confirm') {
+            await Offer.create(metadata)
+        } else if (metadata.type === 'offer') {
+            await Confirm.create(metadata)
+        }
     } catch (err) {
         console.error(err.message)
     }
@@ -158,7 +163,7 @@ const handleLetter = async (type, id_letter, id_drive) => {
 
 const upload = async (req, res) => {
     const { drive } = await connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
-    const { type, year, id_letter = null, nomor_surat = null } = req.body
+    const { type, year, id_letter = null, nomor_surat = null, metadata = {} } = req.body
 
     const id_folder = type === 'other' ? driveMap[type] : driveMap[type][year] // Get Folder Number
 
@@ -198,7 +203,7 @@ const upload = async (req, res) => {
 
         if (type === 'other' && !id_letter) {
             // Update Increment
-            await handleOther(nomor_surat * 1)
+            await handleOther(metadata, uploadedFile.data.id)
         } else {
             // Update Status
             await handleLetter(type, id_letter, uploadedFile.data.id)

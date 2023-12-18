@@ -16,11 +16,18 @@ const getLatestNumber = async () => {
     }
 }
 
-const updateLatestNumber = async (newNumber) => {
+const updateLatestNumber = async (type = "other", newNumber) => {
     try {
-        const newIncrement = {
-            latest_number: newNumber,
-            latest_template: 'VZE-2023-' + newNumber
+        let newIncrement = {}
+
+        if (type === "confirm") {
+            newIncrement = {
+                cl_latest_number: newNumber
+            }
+        } else if (type === 'offer') {
+            newIncrement = {
+                ol_latest_number: newNumber
+            }
         }
 
         const updatedNumber = await Increment.updateOne({ _id: '6558c49a249bc64208262fb4' }, newIncrement)

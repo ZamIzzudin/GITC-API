@@ -1,0 +1,758 @@
+{
+    "categories": [
+        {
+            "code": "FAT",
+            "name": "FLIGHT ATTENDANT",
+            "subcategories": [
+                {
+                    "code": "FAT01",
+                    "name": "Beauty Class and Social Grace"
+                },
+                {
+                    "code": "FAT02",
+                    "name": "Crew Emergency Training & Door Drill Airbus A320 - Dry-Lease"
+                },
+                {
+                    "code": "FAT03",
+                    "name": "Crew Emergency Training & Door Drill Airbus A320 - Wet-Lease"
+                },
+                {
+                    "code": "FAT04",
+                    "name": "Crew Emergency Training & Door Drill Airbus A330 - Dry-Lease"
+                },
+                {
+                    "code": "FAT05",
+                    "name": "Crew Emergency Training & Door Drill Airbus A330 - Wet-Lease"
+                },
+                {
+                    "code": "FAT06",
+                    "name": "Crew Emergency Training & Door Drill ATR 42/72 - Dry-Lease"
+                },
+                {
+                    "code": "FAT07",
+                    "name": "Crew Emergency Training & Door Drill ATR 42/72 - Wet-Lease"
+                },
+                {
+                    "code": "FAT08",
+                    "name": "Crew Emergency Training & Door Drill B737 - Dry-Lease"
+                },
+                {
+                    "code": "FAT09",
+                    "name": "Crew Emergency Training & Door Drill B737 - Wet-Lease"
+                },
+                {
+                    "code": "FAT10",
+                    "name": "Crew Emergency Training & Door Drill B777 - Dry-Lease"
+                },
+                {
+                    "code": "FAT11",
+                    "name": "Crew Emergency Training & Door Drill B777 - Wet-Lease"
+                },
+                {
+                    "code": "FAT12",
+                    "name": "Crew Emergency Training & Door Drill CRJ-1000 - Dry-Lease"
+                },
+                {
+                    "code": "FAT13",
+                    "name": "Crew Emergency Training & Door Drill CRJ-1000 - Wet-Lease"
+                },
+                {
+                    "code": "FAT14",
+                    "name": "Crew Emergency Training Airbus A320 - Dry-Lease"
+                },
+                {
+                    "code": "FAT15",
+                    "name": "Crew Emergency Training Airbus A320 - Wet-Lease"
+                },
+                {
+                    "code": "FAT16",
+                    "name": "Crew Emergency Training Airbus A330 - Dry-Lease"
+                },
+                {
+                    "code": "FAT17",
+                    "name": "Crew Emergency Training Airbus A330 - Wet-Lease"
+                },
+                {
+                    "code": "FAT18",
+                    "name": "Crew Emergency Training ATR 42/72 - Dry-Lease"
+                },
+                {
+                    "code": "FAT19",
+                    "name": "Crew Emergency Training ATR 42/72 - Wet-Lease"
+                },
+                {
+                    "code": "FAT20",
+                    "name": "Crew Emergency Training B737 - Dry-Lease"
+                },
+                {
+                    "code": "FAT21",
+                    "name": "Crew Emergency Training B737 - Wet-Lease"
+                },
+                {
+                    "code": "FAT22",
+                    "name": "Crew Emergency Training B777 - Dry-Lease"
+                },
+                {
+                    "code": "FAT23",
+                    "name": "Crew Emergency Training B777 - Wet-Lease"
+                },
+                {
+                    "code": "FAT24",
+                    "name": "Crew Emergency Training CRJ 1000 - Dry-Lease"
+                },
+                {
+                    "code": "FAT25",
+                    "name": "Crew Emergency Training CRJ 1000 - Wet-Lease"
+                },
+                {
+                    "code": "FAT26",
+                    "name": "Differences Training Aircraft Type Rating A 330-200"
+                },
+                {
+                    "code": "FAT27",
+                    "name": "Differences Training Aircraft Type Rating A 330-300"
+                },
+                {
+                    "code": "FAT28",
+                    "name": "Differences Training Aircraft Type Rating B 737-800 NG"
+                },
+                {
+                    "code": "FAT29",
+                    "name": "Dry-Lease Crew Emergency Training"
+                },
+                {
+                    "code": "FAT30",
+                    "name": "Dry-Lease Drill, Mockup & Classroom Airbus A320"
+                },
+                {
+                    "code": "FAT31",
+                    "name": "Dry-Lease Drill, Mockup & Classroom Airbus A330"
+                },
+                {
+                    "code": "FAT32",
+                    "name": "Dry-Lease Drill, Mockup & Classroom ATR 42/72"
+                },
+                {
+                    "code": "FAT33",
+                    "name": "Dry-Lease Drill, Mockup & Classroom B737"
+                },
+                {
+                    "code": "FAT34",
+                    "name": "Dry-Lease Drill, Mockup & Classroom B777"
+                },
+                {
+                    "code": "FAT35",
+                    "name": "Dry-Lease Drill, Mockup & Classroom CRJ 1000"
+                },
+                {
+                    "code": "FAT36",
+                    "name": "Dry-Lease Ground Training"
+                },
+                {
+                    "code": "FAT37",
+                    "name": "Emergency Evacuation Simulation"
+                },
+                {
+                    "code": "FAT38",
+                    "name": "Initial Aviation Security AwarenessTraining"
+                },
+                {
+                    "code": "FAT39",
+                    "name": "Initial Crew Emergency Training"
+                },
+                {
+                    "code": "FAT40",
+                    "name": "Initial Crew Resource Management Training"
+                },
+                {
+                    "code": "FAT41",
+                    "name": "Initial Dangerous Goods Awareness Training"
+                },
+                {
+                    "code": "FAT42",
+                    "name": "Initial Equipment / Transition Training Aircraft Type Rating Airbus A330"
+                },
+                {
+                    "code": "FAT43",
+                    "name": "Initial Equipment / Transition Training Aircraft Type Rating ATR 42/72"
+                },
+                {
+                    "code": "FAT44",
+                    "name": "Initial Equipment / Transition Training Aircraft Type Rating B 737"
+                },
+                {
+                    "code": "FAT45",
+                    "name": "Initial Equipment / Transition Training Aircraft Type Rating B777"
+                },
+                {
+                    "code": "FAT46",
+                    "name": "Initial Equipment / Transition Training Aircraft Type Rating CRJ-1000"
+                },
+                {
+                    "code": "FAT47",
+                    "name": "Initial Flight Attendant Aircraft Type Rating B737"
+                },
+                {
+                    "code": "FAT48",
+                    "name": "Instructor Recurrent Training"
+                },
+                {
+                    "code": "FAT49",
+                    "name": "Introduction to Flight Attendant Profession"
+                },
+                {
+                    "code": "FAT50",
+                    "name": "Mandatory Training Airbus A320 - Dry-Lease"
+                },
+                {
+                    "code": "FAT51",
+                    "name": "Mandatory Training Airbus A320 - Wet-Lease"
+                },
+                {
+                    "code": "FAT52",
+                    "name": "Mandatory Training Airbus A330 - Dry-Lease"
+                },
+                {
+                    "code": "FAT53",
+                    "name": "Mandatory Training Airbus A330 - Wet-Lease"
+                },
+                {
+                    "code": "FAT54",
+                    "name": "Mandatory Training ATR 42/72 - Dry-Lease"
+                },
+                {
+                    "code": "FAT55",
+                    "name": "Mandatory Training ATR 42/72 - Wet-Lease"
+                },
+                {
+                    "code": "FAT56",
+                    "name": "Mandatory Training B737 - Dry-Lease"
+                },
+                {
+                    "code": "FAT57",
+                    "name": "Mandatory Training B737 - Wet-Lease"
+                },
+                {
+                    "code": "FAT58",
+                    "name": "Mandatory Training B777 - Dry-Lease"
+                },
+                {
+                    "code": "FAT59",
+                    "name": "Mandatory Training B777 - Wet-Lease"
+                },
+                {
+                    "code": "FAT60",
+                    "name": "Mandatory Training CRJ-1000 - Dry-Lease"
+                },
+                {
+                    "code": "FAT61",
+                    "name": "Mandatory Training CRJ-1000 - Wet-Lease"
+                },
+                {
+                    "code": "FAT62",
+                    "name": "Mandatory Training Flight Attendant"
+                },
+                {
+                    "code": "FAT63",
+                    "name": "Observer Crew Emergency Training A320 Dry-Lease"
+                },
+                {
+                    "code": "FAT64",
+                    "name": "Observer Crew Emergency Training Airbus A320 Wet-Lease"
+                },
+                {
+                    "code": "FAT65",
+                    "name": "Observer Crew Emergency Training Airbus A330 Dry-Lease"
+                },
+                {
+                    "code": "FAT66",
+                    "name": "Observer Crew Emergency Training Airbus A330 Wet-Lease"
+                },
+                {
+                    "code": "FAT67",
+                    "name": "Observer Crew Emergency Training ATR 42/72 Dry-Lease"
+                },
+                {
+                    "code": "FAT68",
+                    "name": "Observer Crew Emergency Training ATR 42/72 Wet-Lease"
+                },
+                {
+                    "code": "FAT69",
+                    "name": "Observer Crew Emergency Training B737 Dry-Lease"
+                },
+                {
+                    "code": "FAT70",
+                    "name": "Observer Crew Emergency Training B737 Wet-Lease"
+                },
+                {
+                    "code": "FAT71",
+                    "name": "Observer Crew Emergency Training B777 Dry-Lease"
+                },
+                {
+                    "code": "FAT72",
+                    "name": "Observer Crew Emergency Training B777 Wet-Lease"
+                },
+                {
+                    "code": "FAT73",
+                    "name": "Observer Crew Emergency Training CRJ 1000 Dry-Lease"
+                },
+                {
+                    "code": "FAT74",
+                    "name": "Observer Crew Emergency Training CRJ 1000 Wet-Lease"
+                },
+                {
+                    "code": "FAT75",
+                    "name": "Recurrent Aviation Security Awareness Training"
+                },
+                {
+                    "code": "FAT76",
+                    "name": "Recurrent Crew Emergency Training"
+                },
+                {
+                    "code": "FAT77",
+                    "name": "Recurrent Dangerous Goods Awareness Training"
+                },
+                {
+                    "code": "FAT78",
+                    "name": "Recurrent Training  AirbusA320 - Dry-Lease"
+                },
+                {
+                    "code": "FAT79",
+                    "name": "Recurrent Training Airbus A320 - Wet-Lease"
+                },
+                {
+                    "code": "FAT80",
+                    "name": "Recurrent Training Airbus A330 - Dry-Lease"
+                },
+                {
+                    "code": "FAT81",
+                    "name": "Recurrent Training Airbus A330 - Wet-Lease"
+                },
+                {
+                    "code": "FAT82",
+                    "name": "Recurrent Training ATR 42/72 - Dry-Lease"
+                },
+                {
+                    "code": "FAT83",
+                    "name": "Recurrent Training ATR 42/72 - Wet-Lease"
+                },
+                {
+                    "code": "FAT84",
+                    "name": "Recurrent Training B737 - Dry-Lease"
+                },
+                {
+                    "code": "FAT85",
+                    "name": "Recurrent Training B737 - Wet-Lease"
+                },
+                {
+                    "code": "FAT86",
+                    "name": "Recurrent Training B777 - Dry-Lease"
+                },
+                {
+                    "code": "FAT87",
+                    "name": "Recurrent Training B777 - Wet-Lease"
+                },
+                {
+                    "code": "FAT88",
+                    "name": "Recurrent Training CRJ-1000 - Dry-Lease"
+                },
+                {
+                    "code": "FAT89",
+                    "name": "Recurrent Training CRJ-1000 - Wet-Lease"
+                },
+                {
+                    "code": "FAT90",
+                    "name": "Safety Mock Up & Door Drill / Dry-Lease"
+                },
+                {
+                    "code": "FAT91",
+                    "name": "Safety Mock Up & Door Drill / Wet-Lease"
+                },
+                {
+                    "code": "FAT92",
+                    "name": "Service Training FA"
+                },
+                {
+                    "code": "FAT93",
+                    "name": "Table Manners and Hotel Orientation"
+                }
+            ]
+        },
+        {
+            "code": "ABT",
+            "name": "AIRLINE BUSINESS TRAINING",
+            "subcategories": [
+                {
+                    "code": "ABT01",
+                    "name": "Air Cargo Handling"
+                },
+                {
+                    "code": "ABT02",
+                    "name": "Basic Cargo Skill & Procedures"
+                },
+                {
+                    "code": "ABT03",
+                    "name": "Dangerous Goods Regulation for Accepting Initial"
+                },
+                {
+                    "code": "ABT04",
+                    "name": "Dangerous Goods Regulation for Accepting Recurrent"
+                },
+                {
+                    "code": "ABT05",
+                    "name": "Dangerous Goods Regulation for Preparing Initial"
+                },
+                {
+                    "code": "ABT06",
+                    "name": "Dangerous Goods Regulation for Preparing Recurrent"
+                },
+                {
+                    "code": "ABT07",
+                    "name": "Dangerous Goods Regulation for Processing Initial"
+                },
+                {
+                    "code": "ABT08",
+                    "name": "Dangerous Goods Regulation for Processing Recurrent"
+                },
+                {
+                    "code": "ABT09",
+                    "name": "Live Animals Regulations"
+                },
+                {
+                    "code": "ABT10",
+                    "name": "Service Excellence"
+                },
+                {
+                    "code": "ABT11",
+                    "name": "Service Quality Champion"
+                },
+                {
+                    "code": "ABT12",
+                    "name": "Training Hospitality"
+                }
+            ]
+        },
+        {
+            "code": "LDT",
+            "name": "LEADERSHIP & DEVELOPMENT TRAINING",
+            "subcategories": [
+                {
+                    "code": "LDT01",
+                    "name": "Dry-Lease Program Leadership"
+                },
+                {
+                    "code": "LDT02",
+                    "name": "Internal Quality Auditor"
+                },
+                {
+                    "code": "LDT03",
+                    "name": "Training for Trainers"
+                },
+                {
+                    "code": "LDT04",
+                    "name": "Wet-Lease Program Leadership"
+                }
+            ]
+        },
+        {
+            "code": "FOO",
+            "name": "FLIGHT OPERATION OFFICER",
+            "subcategories": [
+                {
+                    "code": "FOO01",
+                    "name": "Aircraft Transition A330-900"
+                },
+                {
+                    "code": "FOO02",
+                    "name": "CAT II / III (LVO) Training"
+                },
+                {
+                    "code": "FOO03",
+                    "name": "Extended Twin Engine Operations (ETOPs) Training"
+                },
+                {
+                    "code": "FOO04",
+                    "name": "Initial Equipment / Transition Training Aircraft Type Rating  Airbus A320"
+                },
+                {
+                    "code": "FOO05",
+                    "name": "Initial Equipment / Transition Training Aircraft Type Rating Airbus A330"
+                },
+                {
+                    "code": "FOO06",
+                    "name": "Initial Equipment / Transition Training Aircraft Type Rating ATR 42/72"
+                },
+                {
+                    "code": "FOO07",
+                    "name": "Initial Equipment / Transition Training Aircraft Type Rating B 737 NG"
+                },
+                {
+                    "code": "FOO08",
+                    "name": "Initial Equipment / Transition Training Aircraft Type Rating B 777"
+                },
+                {
+                    "code": "FOO09",
+                    "name": "Initial Training Aircraft Type Rating Airbus A320"
+                },
+                {
+                    "code": "FOO10",
+                    "name": "Initial Training Aircraft Type Rating B 737 NG"
+                },
+                {
+                    "code": "FOO11",
+                    "name": "Performance Based Navigation (PBN) Training"
+                },
+                {
+                    "code": "FOO12",
+                    "name": "Recurrent Training Aircraft Type Rating Airbus A320"
+                },
+                {
+                    "code": "FOO13",
+                    "name": "Recurrent Training Aircraft Type Rating Airbus A330"
+                },
+                {
+                    "code": "FOO14",
+                    "name": "Recurrent Training Aircraft Type Rating B 737 NG"
+                },
+                {
+                    "code": "FOO15",
+                    "name": "Recurrent Training Aircraft Type Rating B 777"
+                },
+                {
+                    "code": "FOO16",
+                    "name": "Reduce Vertical Separation Minima (RVSM) Training"
+                }
+            ]
+        },
+        {
+            "code": "FCT",
+            "name": "FLIGHT CREW TRAINING",
+            "subcategories": [
+                {
+                    "code": "FCT01",
+                    "name": "Airline Pilot Bridging Course"
+                },
+                {
+                    "code": "FCT02",
+                    "name": "CCQ Training Airbus A330"
+                },
+                {
+                    "code": "FCT03",
+                    "name": "Differences Training Aircraft Type Rating B 737 NG"
+                },
+                {
+                    "code": "FCT04",
+                    "name": "Differences Training ATR 72-600"
+                },
+                {
+                    "code": "FCT05",
+                    "name": "Dry Lease Sim Airbus A320"
+                },
+                {
+                    "code": "FCT06",
+                    "name": "Dry Lease Sim Airbus A330"
+                },
+                {
+                    "code": "FCT07",
+                    "name": "Dry Lease Sim ATR 72-600"
+                },
+                {
+                    "code": "FCT08",
+                    "name": "Dry Lease Sim B737-800"
+                },
+                {
+                    "code": "FCT09",
+                    "name": "Dry Lease Sim B777"
+                },
+                {
+                    "code": "FCT10",
+                    "name": "Dry Lease Sim CRJ-1000"
+                },
+                {
+                    "code": "FCT11",
+                    "name": "ELT + MCC Course ATR 42/72"
+                },
+                {
+                    "code": "FCT12",
+                    "name": "ICAO Language Proficiency Requirements For Pilots"
+                },
+                {
+                    "code": "FCT13",
+                    "name": "ICAO Language Proficiency Training"
+                },
+                {
+                    "code": "FCT14",
+                    "name": "Initial Aviation Security"
+                },
+                {
+                    "code": "FCT15",
+                    "name": "Initial CAT II / III (LVO) Training B 737 NG"
+                },
+                {
+                    "code": "FCT16",
+                    "name": "Initial Crew Resource Management Training"
+                },
+                {
+                    "code": "FCT17",
+                    "name": "Initial Dangerous Goods Awareness Training"
+                },
+                {
+                    "code": "FCT18",
+                    "name": "Initial Extended Twin Engine Operations (ETOPS) Ground Training B 737 NG"
+                },
+                {
+                    "code": "FCT19",
+                    "name": "Initial Safety Emergency Procedure Training"
+                },
+                {
+                    "code": "FCT20",
+                    "name": "Initial Training Initial Rating Airbus A320"
+                },
+                {
+                    "code": "FCT21",
+                    "name": "Initial Training Initial Rating Airbus A330"
+                },
+                {
+                    "code": "FCT22",
+                    "name": "Initial Training Initial Rating ATR72-600"
+                },
+                {
+                    "code": "FCT23",
+                    "name": "Initial Training Initial Rating B737-800"
+                },
+                {
+                    "code": "FCT24",
+                    "name": "Initial Training Initial Rating B777"
+                },
+                {
+                    "code": "FCT25",
+                    "name": "Initial Training Initial Rating CRJ-1000"
+                },
+                {
+                    "code": "FCT26",
+                    "name": "Performance Based Navigation Training (General)"
+                },
+                {
+                    "code": "FCT27",
+                    "name": "Performance Based NavigationTraining Airbus A320"
+                },
+                {
+                    "code": "FCT28",
+                    "name": "Performance Based NavigationTraining Airbus A330"
+                },
+                {
+                    "code": "FCT29",
+                    "name": "Performance Based NavigationTraining ATR 72-600"
+                },
+                {
+                    "code": "FCT30",
+                    "name": "Performance Based NavigationTraining B737-800"
+                },
+                {
+                    "code": "FCT31",
+                    "name": "Performance Based NavigationTraining B77"
+                },
+                {
+                    "code": "FCT32",
+                    "name": "Performance Based NavigationTraining CRJ-1000"
+                },
+                {
+                    "code": "FCT33",
+                    "name": "Recurrent CAT II / III (LVO) Training B 737 NG"
+                },
+                {
+                    "code": "FCT34",
+                    "name": "Recurrent Extended Twin Engine Operations (ETOPS) Ground Training"
+                },
+                {
+                    "code": "FCT35",
+                    "name": "Type Recurrent & Profficiency Check Airbus A320"
+                },
+                {
+                    "code": "FCT36",
+                    "name": "Type Recurrent & Profficiency Check Airbus A330"
+                },
+                {
+                    "code": "FCT37",
+                    "name": "Type Recurrent & Profficiency Check ATR 72-600"
+                },
+                {
+                    "code": "FCT38",
+                    "name": "Type Recurrent & Profficiency Check B737-800"
+                },
+                {
+                    "code": "FCT39",
+                    "name": "Type Recurrent & Profficiency Check B777"
+                },
+                {
+                    "code": "FCT40",
+                    "name": "Type Recurrent & Profficiency Check CRJ-1000"
+                },
+                {
+                    "code": "FCT41",
+                    "name": "Wet Lease Sim Airbus A320"
+                },
+                {
+                    "code": "FCT42",
+                    "name": "Wet Lease Sim Airbus A330"
+                },
+                {
+                    "code": "FCT43",
+                    "name": "Wet Lease Sim ATR 72-600"
+                },
+                {
+                    "code": "FCT44",
+                    "name": "Wet Lease Sim B737-800"
+                },
+                {
+                    "code": "FCT45",
+                    "name": "Wet Lease Sim B777"
+                },
+                {
+                    "code": "FCT46",
+                    "name": "Wet Lease Sim CRJ-1000"
+                },
+                {
+                    "code": "FCT47",
+                    "name": "Wet-Lease IELP Test"
+                },
+                {
+                    "code": "FCT48",
+                    "name": "Windshear Simulator Experience"
+                }
+            ]
+        },
+        {
+            "code": "OTH",
+            "name": "OTHERS-OTH",
+            "subcategories": [
+                {
+                    "code": "OTH00",
+                    "name": "Custom"
+                },
+                {
+                    "code": "OTH01",
+                    "name": "Field Trip"
+                }
+            ]
+        },
+        {
+            "code": "VZU",
+            "name": "OTHERS-VZU",
+            "subcategories": [
+                {
+                    "code": "VZU00",
+                    "name": "Custom"
+                },
+                {
+                    "code": "VZU01",
+                    "name": "Sewa Ruangan Kelas"
+                },
+                {
+                    "code": "VZU02",
+                    "name": "Sewa Ruangan Auditorium"
+                }
+            ]
+        }
+    ]
+}
