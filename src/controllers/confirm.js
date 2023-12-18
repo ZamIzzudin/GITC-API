@@ -324,7 +324,7 @@ const print = async (req, res) => {
             }
         })
 
-        const setup_no_surat = 'CL' + sub_category + latestNumber.cl_latest_number + confirm.tanggal_surat.split('-')[2] + confirm.tanggal_surat.split('-')[1]
+        const setup_no_surat = 'CL' + sub_category + latestNumber.cl_latest_number.toString() + confirm.tanggal_surat.split('-')[2].toString() + confirm.tanggal_surat.split('-')[1].toString()
 
         const payload = {
             nomor_surat: setup_no_surat,

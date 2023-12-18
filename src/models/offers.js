@@ -12,11 +12,7 @@ const offer_scheme = new mongoose.Schema({
     alamat_perusahaan: String,
     nama_tertuju: String,
     jabatan: String,
-    media_ref: {
-        type: String,
-        enum: ["Email", "Telepon", "Perjanjian Kerja Sama", "Kesepakatan Pada Tanggal"],
-        default: ["Email"]
-    },
+    media_ref: String,
     tanggal_ref: String,
     jenis_permohonan: String,
     jumlah_produk: Number,
