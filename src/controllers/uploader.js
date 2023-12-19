@@ -8,6 +8,7 @@ const Report = require('../models/reports')
 const connector = require('../config/gdrive.js')
 const config = require('../config/config.js')
 const fs = require('fs');
+const path = require("path");
 
 const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } = config
 
@@ -166,7 +167,7 @@ const handleLetter = async (type, id_letter, id_drive) => {
 
 const upload = async (req, res) => {
     const { drive } = await connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
-    const { type, year, id_letter = null, nomor_surat = null, metadata = {} } = req.body
+    const { type, year, id_letter = null, metadata = {} } = req.body
 
     const id_folder = type === 'other' ? driveMap[type] : driveMap[type][year] // Get Folder Number
 
@@ -182,7 +183,7 @@ const upload = async (req, res) => {
         const file = req.files.file
 
         // temp file convert
-        const tempFilePath = `/temp/${file.name}`
+        const tempFilePath = path.join(__dirname + file.name)
         fs.writeFileSync(tempFilePath, file.data)
 
         const fileMetadata = {
