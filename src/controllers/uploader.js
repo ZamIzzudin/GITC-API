@@ -206,7 +206,8 @@ const upload = async (req, res) => {
             if (metadata.type === 'confirm') {
                 await Offer.create(data)
             } else if (metadata.type === 'offer') {
-                await Confirm.create(data)
+                const confirm = await Confirm.create(data)
+                console.log(confirm)
             }
         } else {
             // Update Status
