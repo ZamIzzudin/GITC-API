@@ -36,7 +36,16 @@ const driveMap = {
 
 const handleOther = async (metadata, filePath) => {
     try {
+        const payload = {
+            ...metadata,
+            drive_id: filePath
+        }
 
+        if (metadata.type === 'confirm') {
+            await Offer.create(payload)
+        } else if (metadata.type === 'offer') {
+            await Confirm.create(payload)
+        }
     } catch (err) {
         console.error(err.message)
     }
@@ -197,18 +206,8 @@ const upload = async (req, res) => {
         fs.unlinkSync(tempFilePath)
 
         if (type === 'other' && !id_letter) {
-            const data = {
-                ...metadata,
-                drive_id: uploadedFile.data.id,
-                status: 'done'
-            }
-
-            if (metadata.type === 'confirm') {
-                await Offer.create(data)
-            } else if (metadata.type === 'offer') {
-                const confirm = await Confirm.create(data)
-                console.log(confirm)
-            }
+            // Update Increment
+            await handleOther(metadata, uploadedFile.data.id)
         } else {
             // Update Status
             await handleLetter(type, id_letter, uploadedFile.data.id)
