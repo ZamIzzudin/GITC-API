@@ -41,10 +41,11 @@ const handleOther = async (metadata, filePath) => {
             drive_id: filePath
         }
 
-        if (metadata.type === 'confirm') {
+        if (metadata.type === 'offer') {
             await Offer.create(payload)
-        } else if (metadata.type === 'offer') {
+        } else if (metadata.type === 'confirm') {
             await Confirm.create(payload)
+
         }
     } catch (err) {
         console.error(err.message)
@@ -183,7 +184,8 @@ const upload = async (req, res) => {
         const file = req.files.file
 
         // temp file convert
-        const tempFilePath = path.join('/tmp', file.name)
+        // const tempFilePath = path.join(`temp_${file.name}`) // Local
+        const tempFilePath = path.join('/tmp', file.name) // Vercel
         fs.writeFileSync(tempFilePath, file.data)
 
         const fileMetadata = {
@@ -207,7 +209,7 @@ const upload = async (req, res) => {
 
         if (type === 'other' && !id_letter) {
             // Update Increment
-            await handleOther(metadata, uploadedFile.data.id)
+            await handleOther(JSON.parse(metadata), uploadedFile.data.id)
         } else {
             // Update Status
             await handleLetter(type, id_letter, uploadedFile.data.id)
