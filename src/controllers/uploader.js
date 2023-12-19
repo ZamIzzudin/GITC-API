@@ -35,12 +35,15 @@ const driveMap = {
 
 const handleOther = async (metadata, filePath) => {
     try {
-        metadata[drive_id] = filePath
+        const payload = {
+            ...metadata,
+            drive_id: filePath
+        }
 
         if (metadata.type === 'confirm') {
-            await Offer.create(metadata)
+            await Offer.create(payload)
         } else if (metadata.type === 'offer') {
-            await Confirm.create(metadata)
+            await Confirm.create(payload)
         }
     } catch (err) {
         console.error(err.message)
@@ -179,7 +182,7 @@ const upload = async (req, res) => {
         const file = req.files.file
 
         // temp file convert
-        const tempFilePath = `temp_${file.name}`
+        const tempFilePath = `/temp/${file.name}`
         fs.writeFileSync(tempFilePath, file.data)
 
         const fileMetadata = {
