@@ -183,7 +183,7 @@ const upload = async (req, res) => {
         const file = req.files.file
 
         // temp file convert
-        const tempFilePath = path.join(__dirname + file.name)
+        const tempFilePath = path.join('/tmp', file.name)
         fs.writeFileSync(tempFilePath, file.data)
 
         const fileMetadata = {
