@@ -145,13 +145,12 @@ const approve = async (req, res) => {
 
 const revision = async (req, res) => {
     const { id_letter } = req.params
-    const { revision_list, approver } = req.body
+    const { revisi } = req.body
 
     try {
         const payload = {
             status: 'need revision',
-            revisi: revision_list,
-            approver
+            revisi
         }
 
         const revision = await Offer.updateOne({ _id: id_letter }, payload)
