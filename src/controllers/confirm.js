@@ -115,12 +115,10 @@ const create = async (req, res) => {
 
 const approve = async (req, res) => {
     const { id_letter } = req.params
-    const { approver } = req.body
 
     try {
         const payload = {
-            status: 'approved',
-            approver
+            status: 'approved'
         }
 
         const approved = await Confirm.updateOne({ _id: id_letter }, payload)
@@ -234,7 +232,7 @@ const resubmit = async (req, res) => {
         console.log(error.message)
         res.status(404).json({
             status: 404,
-            message: 'failed',
+            message: 'failed', 
             info: 'Server failed'
         })
     }
@@ -242,11 +240,9 @@ const resubmit = async (req, res) => {
 
 const reject = async (req, res) => {
     const { id_letter } = req.params
-    const { approver } = req.body
 
     try {
         const payload = {
-            approver,
             status: 'rejected'
         }
 
