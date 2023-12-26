@@ -110,12 +110,10 @@ const create = async (req, res) => {
 
 const approve = async (req, res) => {
     const { id_letter } = req.params
-    const { approver } = req.body
 
     try {
         const payload = {
-            status: 'approved',
-            approver
+            status: 'approved'
         }
 
         const approved = await Offer.updateOne({ _id: id_letter }, payload)
@@ -234,11 +232,9 @@ const resubmit = async (req, res) => {
 
 const reject = async (req, res) => {
     const { id_letter } = req.params
-    const { approver } = req.body
 
     try {
         const payload = {
-            approver,
             status: 'rejected'
         }
 
