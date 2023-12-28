@@ -100,11 +100,22 @@ const upload = async (req, res) => {
 const webView = async (req, res) => {
     const { drive } = await connector(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
     const { id_file } = req.params
+    permission = {
+        'type': 'anyone',
+        'role': 'reader',
+    }
 
     try {
+        drive.permissions.create({
+            fileId: id_file,
+            requestBody: permission,
+        })
+
         const file = await drive.files.get({ fileId: id_file, fields: 'webViewLink', })
         const fileUrl = file.data.webViewLink;
-        res.redirect(fileUrl)
+        res.json({
+            url: fileUrl
+        })
     } catch (error) {
         console.error(error)
         res.status(500).send('Terjadi kesalahan saat membuka file.')
