@@ -53,23 +53,24 @@ const handleOther = async (metadata, filePath) => {
 }
 
 const handleReport = async (data) => {
-    const { category, sub_category, produk } = data
+    const { category, sub_category, produk_forms } = data
 
     const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
 
-    const report_setup = produk.map(item => {
+
+    const report_setup = produk_forms.map(item => {
         return {
             category,
             sub_category,
             tahun: item.tanggal_kegiatan.split('-')[0],
-            bulan: months[item.tanggal_kegiatan.split('-')[1]],
+            bulan: months[item.tanggal_kegiatan.split('-')[1] - 1],
             unit: item.jumlah_peserta,
             revanue: item.total_biaya_kegiatan
         }
     })
 
     report_setup.forEach(async item => {
-        const report = await Report.findOne({ tahun: item.tahun, bulan: { '$regex': item.bulan, '$options': 'i' } })
+        const report = await Report.findOne({ tahun: item.tahun, bulan: { '$regex': item.bulan.toString(), '$options': 'i' } })
 
         if (report !== null) {
             const updated_revanue = report.total_revanue += item.revanue
@@ -111,7 +112,7 @@ const handleReport = async (data) => {
                 detail: fixed_detail
             }
 
-            await Report.updateOne({ tahun: item.tahun, bulan: { '$regex': item.bulan, '$options': 'i' } }, payload)
+            await Report.updateOne({ tahun: item.tahun, bulan: { '$regex': item.bulan.toString(), '$options': 'i' } }, payload)
 
         } else {
             const payload = {
@@ -179,6 +180,7 @@ const upload = async (req, res) => {
             info: 'No File Found'
         })
     }
+
 
     try {
         const file = req.files.file

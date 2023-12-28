@@ -232,7 +232,7 @@ const resubmit = async (req, res) => {
         console.log(error.message)
         res.status(404).json({
             status: 404,
-            message: 'failed', 
+            message: 'failed',
             info: 'Server failed'
         })
     }
