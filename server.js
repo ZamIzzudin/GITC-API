@@ -22,7 +22,7 @@ app.use('/public', express.static(path.join(__dirname, '/public')))
 //enable cors 
 app.use(cors({
     credentials: true,
-    origin: ['https://dms-vze-garuda.netlify.app', 'http://localhost:5173', 'http://127.0.0.1:5173']
+    origin: ['https://dms-vze-garuda.netlify.app', 'http://localhost:5173', 'http://127.0.0.1:5173','https://vze-garuda.my.id']
 }))
 
 app.use(helmet());
