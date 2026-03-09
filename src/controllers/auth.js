@@ -294,4 +294,68 @@ const guest_list = async (req, res) => {
     }
 }
 
-module.exports = { login, refresh, register, adjust, takedown, user_list, guest_list }
+const genesis = async (req, res) => {
+    try {
+        const GENESIS_PASSWORD = process.env.GENESIS_PASSWORD
+
+        // check if genesis already created
+        const user = await User.find()
+
+        if (user.length > 0) {
+            return res.status(400).json({
+                status: 400,
+                message: 'failed',
+                info: 'Genesis already created'
+            })
+        }
+
+        const encrypted_password = await encrpyt_one_way(GENESIS_PASSWORD)
+
+        // create genesis user
+        const new_user = await User.create({
+            username: 'SUPER',
+            display_name: 'SUPER',
+            role: 'Sysadmin',
+            password: encrypted_password
+        })
+
+        if (new_user) {
+            // generate access token and refresh token
+            const access_token = create_access_token(new_user._id, 'Sysadmin')
+            const refresh_token = create_refresh_token(new_user._id, 'Sysadmin')
+
+            // send cookie with contain refresh token
+            res.cookie("refreshToken", refresh_token, {
+                expires: new Date(Date.now() + 1000 * 60 * 60 * 24), // one day
+                httpOnly: true,
+                secure: true,
+                sameSite: "none"
+            })
+
+            res.status(201).json({
+                status: 201,
+                message: 'success',
+                id: new_user._id,
+                username: new_user.username,
+                display_name: new_user.display_name,
+                role: 'Sysadmin',
+                access_token
+            })
+        } else {
+            return res.status(400).json({
+                status: 400,
+                message: 'failed',
+                info: 'Failed to create genesis account'
+            })
+        }
+    } catch (err) {
+        console.log(err.message)
+        res.status(500).json({
+            status: 500,
+            message: 'failed',
+            info: 'server error'
+        })
+    }
+}
+
+module.exports = { login, refresh, register, adjust, takedown, user_list, guest_list, genesis }

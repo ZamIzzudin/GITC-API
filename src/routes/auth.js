@@ -1,5 +1,5 @@
 const auth = require('express').Router()
-const { login, refresh, register, adjust, takedown, guest_list, user_list } = require('../controllers/auth')
+const { login, refresh, register, adjust, takedown, guest_list, user_list, genesis } = require('../controllers/auth')
 const { sysadmin, islogin } = require('../middleware/privilege')
 
 // GET
@@ -10,6 +10,7 @@ auth.get('/list', sysadmin, user_list)
 // POST
 auth.post('/login', login)
 auth.post('/register', sysadmin, register)
+auth.get('/genesis', genesis)
 
 // PUT
 auth.put('/adjust/:id', sysadmin, adjust)
